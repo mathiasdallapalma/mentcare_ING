@@ -23,8 +23,8 @@
 hs_err_pid*
 
 # Aggiunte Aley
-/build
+build/
 
-.idea
+.idea/
 
-/.gradle
+.gradle/
