@@ -2,7 +2,6 @@ package mentcare;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AppController {
 
     @Autowired
-    private PazienteRepository repository;
+    private PatientRepository repository;
 
     @RequestMapping("/")
     public String index(){
@@ -26,7 +25,7 @@ public class AppController {
     public String create(
             @RequestParam(name="firstname", required=true) String firstname,
             @RequestParam(name="lastname", required=true) String lastname) {
-        repository.save(new Paziente(firstname,lastname));
+        repository.save(new Patient(firstname,lastname));
         return "redirect:/list";
     }
 
