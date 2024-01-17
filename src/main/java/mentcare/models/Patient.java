@@ -3,6 +3,7 @@ package mentcare.models;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Patient {
@@ -87,5 +88,16 @@ public class Patient {
 
     public List<String> getAllergies() {
         return allergies;
+    }
+
+    /**
+     * Metodo controllo valori inseriti per inserimento corretto. Per i vari valori presenti si controlla
+     * la validità ad esempio peso > 0 e < 450 kg.
+     * Per ogni voce, si aggiunge un messaggio di errore in base al campo sbagliato
+     * @return
+     */
+    public Map<String, String> selfCheck(){
+        //TODO
+        return null;
     }
 }
