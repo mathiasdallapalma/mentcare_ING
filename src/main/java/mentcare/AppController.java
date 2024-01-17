@@ -20,10 +20,18 @@ public class AppController {
 
     @RequestMapping("/input")
     public String input(){
-        return "input"; //TODO: input fa riferimento a "input.html" da cambiare nome e la pagina
+        return "input"; //TODO: input fa riferimento a "inputOLD.html" da cambiare nome e la pagina
     }
 
-
+    /*
+    @RequestMapping("/create")
+    public String create(
+            @RequestParam(name="firstname", required=true) String firstname,
+            @RequestParam(name="lastname", required=true) String lastname) {
+        repository.save(new Patient(firstname,lastname));
+        return "redirect:/list";
+    }
+    */
 
 
 }

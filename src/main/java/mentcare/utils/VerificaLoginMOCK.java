@@ -8,7 +8,7 @@ public class VerificaLoginMOCK {
     private String user = "matias00";
     private String pasw = "pass";
 
-    public boolean effettuaLogin(String username, String pass){
+    public boolean checkLogin(String username, String pass){
         return username.equals(getUser()) && pass.equals(getPasw());
     }
 
