@@ -1,4 +1,4 @@
-package mentcare;
+package mentcare.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
