@@ -1,4 +1,4 @@
-package mentcare;
+package mentcare.utils;
 
 /**
  * MOCK per simulare il login dell'utente

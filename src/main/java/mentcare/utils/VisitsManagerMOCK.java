@@ -1,4 +1,4 @@
-package mentcare;
+package mentcare.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
