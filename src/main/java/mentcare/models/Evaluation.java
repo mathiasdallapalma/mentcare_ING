@@ -1,9 +1,11 @@
 package mentcare.models;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Evaluation {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -12,23 +14,23 @@ public class Evaluation {
     private String value;
     private String notes;
     private String motivation;
-    private Long patient_id;
+    private Long patientID;
 
     protected Evaluation() {}
 
-    public Evaluation(String date, String value, String notes, String motivation, Long patient_id) {
+    public Evaluation(String date, String value, String notes, String motivation, Long patientID) {
         this.date = date;
         this.value = value;
         this.notes = notes;
         this.motivation = motivation;
-        this.patient_id = patient_id;
+        this.patientID= patientID;
     }
 
     @Override
     public String toString() {
         return String.format(
                 "Evaluation[id=%d, date='%s', value='%s', notes='%s', motivation='%s', patient_id='%d']",
-                id, date, value, notes, motivation, patient_id);
+                id, date, value, notes, motivation, patientID);
     }
 
     /* Getters */
@@ -48,6 +50,6 @@ public class Evaluation {
         return motivation;
     }
     public Long getPatient_id() {
-        return patient_id;
+        return patientID;
     }
 }

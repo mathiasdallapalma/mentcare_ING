@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface PrescriptionRepository extends CrudRepository<Prescription, Long> {
 
-    List<Prescription> findByPatient_id(Long patient_id);
+    List<Prescription> findByPatientID(Long patientID);
     Prescription findById(long id);
 }

@@ -20,6 +20,7 @@ public class Patient {
     private String phonenumber;
     private String email;
     private String address;
+    @ElementCollection(targetClass=String.class)
     private List<String> allergies;
 
     protected Patient() {}
@@ -41,7 +42,7 @@ public class Patient {
 
     private List<String> getAllergiesList(String allergies) {
         //TODO
-        return new ArrayList<>();
+        return new ArrayList<String>();
     }
 
     public String getFirstname() {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EvaluationRepository extends CrudRepository<Evaluation, Long> {
 
-        List<Evaluation> findByPatient_id(Long patient_id);
+        List<Evaluation> findByPatientID(Long patientID);
         Evaluation findById(long id);
 }
 

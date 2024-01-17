@@ -1,9 +1,10 @@
 package mentcare.models;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+@Entity
 public class Prescription {
 
     @Id
@@ -13,22 +14,22 @@ public class Prescription {
     private String drugs;
     private Integer quantity;
     private String notes;
-    private Long patient_id;
+    private Long patientID;
 
     protected Prescription() {}
 
-    public Prescription(String drugs, Integer quantity, String notes, Long patient_id) {
+    public Prescription(String drugs, Integer quantity, String notes, Long patientID) {
         this.drugs = drugs;
         this.quantity = quantity;
         this.notes = notes;
-        this.patient_id = patient_id;
+        this.patientID = patientID;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Prescription[id=%d, drugs='%s', qantity='%d', notes='%s', patient_id='%d']",
-                id, drugs, quantity, notes, patient_id);
+                "Prescription[id=%d, drugs='%s', qantity='%d', notes='%s', patientID='%d']",
+                id, drugs, quantity, notes, patientID);
     }
     
     public String getDrugs() {
@@ -43,8 +44,8 @@ public class Prescription {
         return notes;
     }
 
-    public Long getPatient_id() {
-        return patient_id;
+    public Long getpatientID() {
+        return patientID;
     }
 
 }
