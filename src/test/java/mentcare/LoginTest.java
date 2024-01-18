@@ -6,6 +6,7 @@ package mentcare;
 /*---*/
 
 
+import mentcare.pageObjects.HomePO;
 import mentcare.pageObjects.LoginPO;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -23,7 +24,7 @@ public class LoginTest extends SystemTest {
 
         loginPO.insertUsername("admin");
         loginPO.insertPassword("admin");
-        HomepagePO homepagePO=loginPO.clickSubmit();
+        HomePO homepagePO=loginPO.clickSubmit();
 
         assertEquals("Patient list message expected", "Patient list", homepagePO.getTitle());
     }
@@ -34,9 +35,9 @@ public class LoginTest extends SystemTest {
 
         loginPO.insertUsername("admin");
         loginPO.insertPassword("");
-        int status=loginPO.clickSubmit().getStatus(); //TODO come dimostro che il login è fallito?
+        ErrorPO errorPO=loginPO.clickSubmit(); //TODO come dimostro che il login è fallito?
 
-        assertEquals("Login failed, status code:", 403, status);
+        assertEquals("Login failed, status code:", "Login failed", errorPO.getErrorMessage()
     }
 
 }

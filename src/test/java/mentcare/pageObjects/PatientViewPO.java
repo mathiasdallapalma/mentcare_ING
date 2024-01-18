@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import javax.xml.xpath.XPath;
-
-public class ViewPatientPO extends PageObject{
+public class PatientViewPO extends PageObject{
 
     @FindBy(id = "name")
     private WebElement nameText;
@@ -17,10 +15,13 @@ public class ViewPatientPO extends PageObject{
     @FindBy(id = "add_prescription_btn")
     private WebElement addPrescriptionButton;
 
-    @FindBy(XPath = "//table[@id='evaluations_table']/tbody/tr[first()]")
+    @FindBy(id = "report_btn")
+    private WebElement reportButton;
+
+    @FindBy(xpath = "//table[@id='evaluations_table']/tbody/tr[first()]")
     private WebElement lastEvaluationRow;
 
-    public ViewPatientPO(WebDriver d) {
+    public PatientViewPO(WebDriver d) {
         super(d);
     }
 
@@ -30,18 +31,34 @@ public class ViewPatientPO extends PageObject{
     }
     public AddPrescriptionPO clickAddPrescription(){
         this.addPrescriptionButton.click();
-        return new AddPrescritionPO(driver);
+        return new AddPrescriptionPO(driver);
     }
 
     public String getNameText(){
         return this.nameText.getText();
     }
 
-    public void loadPage() {
-        driver.get("http://localhost:8080/patient/1");
-    }
-
     public String getLastEvaluation_toString() {
         return this.lastEvaluationRow.getText();
+    }
+
+    public String getName() {
+        return nameText.getText();
+    }
+
+    public void loadWithID(int i)  {
+        driver.get("http://localhost:8080/patient/"+i);
+    }
+
+    public boolean isError(int i) {
+        if (!driver.getCurrentUrl().equals("http://localhost:8080/patient/"+i)) {
+            return true;
+        }
+        return false;
+    }
+
+    public ReportPO clickReport() {
+        this.reportButton.click();
+        return new ReportPO(driver);
     }
 }

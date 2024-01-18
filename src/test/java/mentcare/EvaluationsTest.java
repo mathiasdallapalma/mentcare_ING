@@ -6,9 +6,8 @@ package mentcare;
 /*---*/
 
 
-import mentcare.SystemTest;
 import mentcare.pageObjects.AddEvaluationPO;
-import mentcare.pageObjects.ViewPatientPO;
+import mentcare.pageObjects.PatientViewPO;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -17,8 +16,8 @@ import static org.junit.Assert.assertEquals;
 public class EvaluationsTest extends SystemTest {
 
     @Test
-    public void addEvaluation() {
-        ViewPatientPO patientPO = new ViewPatientPO(driver);
+    public void addEvaluationOK() {
+        PatientViewPO patientPO = new PatientViewPO(driver);
         patientPO.loadPage();
 
         AddEvaluationPO addEvaluationPO = patientPO.clickAddEvaluation();
@@ -29,11 +28,11 @@ public class EvaluationsTest extends SystemTest {
         addEvaluationPO.insertMotivation("motivation");
         patientPO=addEvaluationPO.clickSubmit();
 
-        assertEquals("New evaluation expected", "2018-01-01,1,notes,motivation", patientPO.getLastEvaluation_toString());
+        assertEquals("New evaluation expected", "2024-01-01,1,notes,motivation", patientPO.getLastEvaluation_toString());
     }
     @Test
     public void addEvaluationFAIL() {
-        ViewPatientPO patientPO = new ViewPatientPO(driver);
+        PatientViewPO patientPO = new PatientViewPO(driver);
         patientPO.loadPage();
 
         AddEvaluationPO addEvaluationPO = patientPO.clickAddEvaluation();
@@ -42,11 +41,10 @@ public class EvaluationsTest extends SystemTest {
         addEvaluationPO.insertValue("1");//TODO rimmpiazzare con un enum
         addEvaluationPO.insertNotes("notes");
         addEvaluationPO.insertMotivation("motivation");
-        patientPO=addEvaluationPO.clickSubmit();
+        ErrorPO errorPO=addEvaluationPO.clickSubmit();
 
-        assertEquals("Error expected", "Error", patientPO.getStatus());
-        // TODO come facciamo a capire che è un errore? io direi che senza complicarci la vita
-        // con i pop up possiamo reindirizzare ad una pagina con scritto il messaggio di errore
+        assertEquals("Error expected", "Failed to insert Evaluation: future date", patientPO.getErrorMessage());
+
 
     }
 
