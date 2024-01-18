@@ -51,10 +51,7 @@ public class PatientViewPO extends PageObject{
     }
 
     public boolean isError(int i) {
-        if (!driver.getCurrentUrl().equals("http://localhost:8080/patient/"+i)) {
-            return true;
-        }
-        return false;
+        return !driver.getCurrentUrl().equals("http://localhost:8080/patient/" + i);
     }
 
     public ReportPO clickReport() {

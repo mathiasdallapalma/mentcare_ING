@@ -42,6 +42,9 @@ public class AddPatientPO extends PageObject{
     @FindBy(id = "allergies_input")
     private WebElement boxallergies;
 
+    @FindBy(id = "cf_input")
+    private WebElement boxcf;
+
     @FindBy(id = "submitbutton_input")
     private WebElement submitbutton;
 
@@ -103,12 +106,19 @@ public class AddPatientPO extends PageObject{
         this.boxallergies.sendKeys(in);
     }
 
-    public void clickSubmit(){
-        this.submitbutton.click();
+    public void addCf(String in){
+        this.boxcf.clear();
+        this.boxcf.sendKeys(in);
     }
 
-    public void clickCancel(){
+    public HomePO clickSubmit(){
+        this.submitbutton.click();
+        return new HomePO(driver);
+    }
+
+    public HomePO clickCancel(){
         this.cancelbutton.click();
+        return new HomePO(driver);
     }
 
 }

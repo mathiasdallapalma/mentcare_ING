@@ -1,5 +1,7 @@
 package mentcare.models;
 
+import mentcare.utils.Utils;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class Patient {
     private String lastname;
     private Integer weight;
     private Integer height;
-    private String age;
+    private Integer age;
     private String birthdate;
     private String sex;
     private String phonenumber;
@@ -23,11 +25,12 @@ public class Patient {
     private String address;
     @ElementCollection(targetClass=String.class)
     private List<String> allergies;
+    private String cf; //codice fiscale
 
     protected Patient() {}
 
-    public Patient(String firstname, String lastname, Integer weight, Integer height, String age, String birthdate, String sex,
-                   String phonenumber, String email, String address, String allergies) {
+    public Patient(String firstname, String lastname, Integer weight, Integer height, Integer age, String birthdate, String sex,
+                   String phonenumber, String email, String address, String allergies, String cf) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.weight = weight;
@@ -39,11 +42,11 @@ public class Patient {
         this.email = email;
         this.address = address;
         this.allergies = getAllergiesList(allergies);
+        this.cf = cf;
     }
 
     private List<String> getAllergiesList(String allergies) {
-        //TODO
-        return new ArrayList<String>();
+        return Utils.createAllergiesList(allergies);
     }
 
     public String getFirstname() {
@@ -62,7 +65,7 @@ public class Patient {
         return height;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
@@ -88,6 +91,10 @@ public class Patient {
 
     public List<String> getAllergies() {
         return allergies;
+    }
+
+    public String getCf() {
+        return cf;
     }
 
     /**

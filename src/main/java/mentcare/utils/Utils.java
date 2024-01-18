@@ -7,17 +7,17 @@ import java.util.List;
 public class Utils {
 
 
-    public List<String> createAllergiesList(String all){
+    public static List<String> createAllergiesList(String all){
         //TODO
         return null;
     }
 
-    public String generatePatientReport(Patient patient){
+    public static String generatePatientReport(Patient patient){
         //TODO
         return "";
     }
 
-    public String generateGeneralReport(Iterable<Patient> patients){
+    public static String generateGeneralReport(Iterable<Patient> patients){
         //TODO
         return "";
     }
