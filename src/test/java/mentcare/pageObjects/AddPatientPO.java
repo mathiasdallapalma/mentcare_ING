@@ -9,43 +9,43 @@ public class AddPatientPO extends PageObject{
         super(d);
     }
 
-    @FindBy(id = "boxfirstname")
+    @FindBy(id = "firstname_input")
     private WebElement boxfirstname;
 
-    @FindBy(id = "boxlastname")
+    @FindBy(id = "lastname_input")
     private WebElement boxlastname;
 
-    @FindBy(id = "boxweight")
+    @FindBy(id = "weight_input")
     private WebElement boxweight;
 
-    @FindBy(id = "boxheight")
+    @FindBy(id = "height_input")
     private WebElement boxheight;
 
-    @FindBy(id = "boxage")
+    @FindBy(id = "age_input")
     private WebElement boxage;
 
-    @FindBy(id = "boxbirthdate")
+    @FindBy(id = "birthdate_input")
     private WebElement boxbirthdate;
 
-    @FindBy(id = "boxsex")
+    @FindBy(id = "sex_input")
     private WebElement boxsex;
 
-    @FindBy(id = "boxphonenumber")
+    @FindBy(id = "phonenumber_input")
     private WebElement boxphonenumber;
 
-    @FindBy(id = "boxemail")
+    @FindBy(id = "email_input")
     private WebElement boxemail;
 
-    @FindBy(id = "boxaddress")
+    @FindBy(id = "address_input")
     private WebElement boxaddress;
 
-    @FindBy(id = "boxallergies")
+    @FindBy(id = "allergies_input")
     private WebElement boxallergies;
 
-    @FindBy(id = "submitbutton")
+    @FindBy(id = "submitbutton_input")
     private WebElement submitbutton;
 
-    @FindBy(id = "cancelbutton")
+    @FindBy(id = "cancelbutton_input")
     private WebElement cancelbutton;
 
     public void addFirstname(String in){
