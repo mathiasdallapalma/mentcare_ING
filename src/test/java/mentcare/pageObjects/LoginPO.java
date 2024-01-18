@@ -6,31 +6,35 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPO extends PageObject{
 
-    @FindBy(name = "firstname")
-    private WebElement nameField;
+    @FindBy(id = "username")
+    private WebElement usernameField;
 
-    @FindBy(name = "lastname")
-    private WebElement lastnameField;
+    @FindBy(id = "password")
+    private WebElement passwordField;
 
-    @FindBy(xpath = "//input[last()]")
-    private WebElement submitbutton;
+    @FindBy(id = "submit_btn")
+    private WebElement submitButton;
 
     public LoginPO(WebDriver d) {
         super(d);
     }
 
-    public void clickSubmit(){
-        this.submitbutton.click();
+    public HomePO clickSubmit(){
+        this.submitButton.click();
+        return new HomePO(driver);
     }
 
-    public void insertName(String name){
-        this.nameField.clear();
-        this.nameField.sendKeys(name);
+    public void insertUsername(String username){
+        this.usernameField.clear();
+        this.usernameField.sendKeys(username);
     }
 
-    public void insertLastName(String lastname){
-        this.lastnameField.clear();
-        this.lastnameField.sendKeys(lastname);
+    public void insertPassword(String password){
+        this.passwordField.clear();
+        this.passwordField.sendKeys(password);
     }
 
+    public void gotoLink() {
+        driver.get("http://localhost:8080/login");
+    }
 }

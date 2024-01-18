@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class SystemTest {
 
-    private WebDriver driver;
+    protected WebDriver driver;
     @Before
     public void setUp() {
         org.openqa.selenium.chrome.ChromeOptions chrome_options = new ChromeOptions();
@@ -38,12 +38,17 @@ public class SystemTest {
             driver = new ChromeDriver(chrome_options);
     }
 
+
+
+
+
     @After
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
+
 
 
 }
