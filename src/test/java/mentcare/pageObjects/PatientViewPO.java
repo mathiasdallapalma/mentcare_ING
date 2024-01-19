@@ -21,6 +21,9 @@ public class PatientViewPO extends PageObject{
     @FindBy(xpath = "//table[@id='evaluations_table']/tbody/tr[first()]")
     private WebElement lastEvaluationRow;
 
+    @FindBy(xpath = "//table[@id='prescription_table']/tbody/tr[first()]")
+    private WebElement lastPrescriptionRow;
+
     public PatientViewPO(WebDriver d) {
         super(d);
     }
@@ -41,7 +44,9 @@ public class PatientViewPO extends PageObject{
     public String getLastEvaluation_toString() {
         return this.lastEvaluationRow.getText();
     }
-
+    public String getLastPrescription_toString() {
+        return this.lastPrescriptionRow.getText();
+    }
     public String getName() {
         return nameText.getText();
     }

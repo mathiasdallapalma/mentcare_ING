@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap 4, from LayoutIt!</title>
+    <title>Patient</title>
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
@@ -20,12 +20,14 @@
 			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded-circle">
 		</div>
 		<div class="col-md-8">
-			 
-			<button type="button" class="btn btn-success">
-				Report
-			</button>
 
-			<h3 th:text="${patient.firstname}+' '+${patient.lastname}">
+			<a href="report" id="report_btn">
+				<button type="button" class="btn btn-success">
+					Report
+				</button>
+			</a>
+
+			<h3 id="name" th:text="${patient.firstname}+' '+${patient.lastname}">
 				Giancarlo Rossi
 			</h3>
 			<p th:utext="
@@ -51,12 +53,12 @@
 		</div>
 	<div class="row">
 		<div class="col-md-6">
-			<a href="addEvaluation">
+			<a href="addEvaluation" id="add_evaluation_btn">
 			<button type="button" class="btn btn-success">
 				Aggiungi Valutazione
 			</button>
 			</a>
-			<table class="table">
+			<table class="table" id="evaluations_table">
 				<thead>
 					<tr>
 						<th>
@@ -84,12 +86,12 @@
 			</table>
 		</div>
 		<div class="col-md-6">
-			<a href="addPrescription">
+			<a href="addPrescription" id="add_prescription_btn">
 			<button type="button" class="btn btn-success">
 				Aggiungi Prescrizione
 			</button>
 			</a>
-			<table class="table">
+			<table class="table" id="prescription_table">
 				<thead>
 					<tr>
 						<th>
