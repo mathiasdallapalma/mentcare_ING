@@ -12,7 +12,7 @@ public class ErrorPO extends PageObject{
     @FindBy(id = "error_text")
     private WebElement error_text;
 
-    private String getErrorMessage(){
+    public String getErrorMessage(){
         return error_text.getText();
     }
 

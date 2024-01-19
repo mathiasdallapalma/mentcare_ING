@@ -1,119 +1,159 @@
 package mentcare;
 
-import mentcare.models.Patient;
 import mentcare.pageObjects.AddPatientPO;
+import mentcare.pageObjects.ErrorPO;
 import mentcare.pageObjects.HomePO;
-import mentcare.pageObjects.PageObject;
+
 import org.junit.Assert;
 import org.junit.Test;
+
 
 public class AddPatientTest extends SystemTest{
 
     @Test
-    public void addPatientTest(){
-        String firstname = "default";
-        String lastname = "default";
+    public void addPatientTestOK(){
+        String firstname = "Marianna";
+        String lastname = "Marroni";
         Integer weight = 70;
         Integer height = 170;
-        Integer age = 40;
+        Integer age = 25;
         String birthdate = "default";
-        String sex = "default";
-        String phonenumber = "default";
-        String email = "default";
-        String address = "default";
-        String allergies = "med1 med2 pioppi";
+        String sex = "Femmina";
+        String phonenumber = "123 4567890";
+        String email = "default@mentcare.org";
+        String address = "via vittoria 2";
+        String allergies = "tachipirina,pioppi,pesce";
         String cf = "codice fiscale 1";
 
         HomePO home = new HomePO(driver);
-        AddPatientPO page = home.clickAddPatient();
+        home.loadPage();
+        AddPatientPO addPatientPage = new AddPatientPO(home.clickAddPatient());
 
-        page.addFirstname(firstname);
-        page.addLastname(lastname);
-        page.addWeight(weight.toString());
-        page.addHeight(height.toString());
-        page.addAge(age);
-        page.addBirthdate(birthdate);
-        page.addSex(sex);
-        page.addPhonenumber(phonenumber);
-        page.addEmail(email);
-        page.addAddress(address);
-        page.addAllergies(allergies);
-        page.addCf(cf);
+        addPatientPage.addFirstname(firstname);
+        addPatientPage.addLastname(lastname);
+        addPatientPage.addWeight(weight.toString());
+        addPatientPage.addHeight(height.toString());
+        addPatientPage.addAge(age);
+        addPatientPage.addBirthdate(birthdate);
+        addPatientPage.addSex(sex);
+        addPatientPage.addPhonenumber(phonenumber);
+        addPatientPage.addEmail(email);
+        addPatientPage.addAddress(address);
+        addPatientPage.addAllergies(allergies);
+        addPatientPage.addCf(cf);
 
-        home = page.clickSubmit();
-        Assert.assertTrue(home.getTableLastRow().contains(firstname)); //non sono sicuro sia corretto
+        HomePO home2 = new HomePO(addPatientPage.clickSubmit());
+        Assert.assertTrue(home2.getTableLastRow().contains(firstname)); //non sono sicuro sia corretto
     }
 
     @Test
     public void addPatientTestWrongValues(){
-        String firstname = "default";
-        String lastname = "default";
+        String firstname = "Andrei";
+        String lastname = "Di là";
         Integer weight = 700;
         Integer height = 1700;
         Integer age = 400;
         String birthdate = "default";
-        String sex = "default";
-        String phonenumber = "default";
-        String email = "default";
+        String sex = "Maschio";
+        String phonenumber = "123 4567890";
+        String email = "elicottero@rosacanina.com";
         String address = "default";
-        String allergies = "med1 med2 pioppi";
+        String allergies = "vita";
         String cf = "codice fiscale 2";
 
         HomePO home = new HomePO(driver);
-        AddPatientPO page = home.clickAddPatient();
+        home.loadPage();
+        AddPatientPO addPatientPage = new AddPatientPO(home.clickAddPatient());
 
-        page.addFirstname(firstname);
-        page.addLastname(lastname);
-        page.addWeight(weight.toString());
-        page.addHeight(height.toString());
-        page.addAge(age);
-        page.addBirthdate(birthdate);
-        page.addSex(sex);
-        page.addPhonenumber(phonenumber);
-        page.addEmail(email);
-        page.addAddress(address);
-        page.addAllergies(allergies);
-        page.addCf(cf);
+        addPatientPage.addFirstname(firstname);
+        addPatientPage.addLastname(lastname);
+        addPatientPage.addWeight(weight.toString());
+        addPatientPage.addHeight(height.toString());
+        addPatientPage.addAge(age);
+        addPatientPage.addBirthdate(birthdate);
+        addPatientPage.addSex(sex);
+        addPatientPage.addPhonenumber(phonenumber);
+        addPatientPage.addEmail(email);
+        addPatientPage.addAddress(address);
+        addPatientPage.addAllergies(allergies);
+        addPatientPage.addCf(cf);
 
-        home = page.clickSubmit();
-
-        Assert.assertTrue(home.isError());
-        //TODO
+        ErrorPO errPage = new ErrorPO(addPatientPage.clickSubmit());
+        String errMess = errPage.getErrorMessage();
+        Assert.assertTrue(errMess.contains("peso"));
+        Assert.assertTrue(errMess.contains("altezza"));
+        Assert.assertTrue(errMess.contains("eta"));
     }
 
     @Test
     public void addPatientTestErrorSameCF(){
-        String firstname = "default";
-        String lastname = "default";
-        Integer weight = 70;
-        Integer height = 170;
-        Integer age = 400;
+        String firstname = "John";
+        String lastname = "Wick";
+        Integer weight = 80;
+        Integer height = 177;
+        Integer age = 35;
         String birthdate = "default";
-        String sex = "default";
-        String phonenumber = "default";
-        String email = "default";
-        String address = "default";
-        String allergies = "med1 med2 pioppi";
-        String cf = "codice fiscale 1";
+        String sex = "Maschio";
+        String phonenumber = "123 4567890";
+        String email = "default@easykills.org";
+        String address = "??Unknown??";
+        String allergies = "";
+        String cf = "AAA";
 
         HomePO home = new HomePO(driver);
-        AddPatientPO page = home.clickAddPatient();
+        home.loadPage();
+        AddPatientPO addPatientPage = new AddPatientPO(home.clickAddPatient());
 
-        page.addFirstname(firstname);
-        page.addLastname(lastname);
-        page.addWeight(weight.toString());
-        page.addHeight(height.toString());
-        page.addAge(age);
-        page.addBirthdate(birthdate);
-        page.addSex(sex);
-        page.addPhonenumber(phonenumber);
-        page.addEmail(email);
-        page.addAddress(address);
-        page.addAllergies(allergies);
-        page.addCf(cf);
+        addPatientPage.addFirstname(firstname);
+        addPatientPage.addLastname(lastname);
+        addPatientPage.addWeight(weight.toString());
+        addPatientPage.addHeight(height.toString());
+        addPatientPage.addAge(age);
+        addPatientPage.addBirthdate(birthdate);
+        addPatientPage.addSex(sex);
+        addPatientPage.addPhonenumber(phonenumber);
+        addPatientPage.addEmail(email);
+        addPatientPage.addAddress(address);
+        addPatientPage.addAllergies(allergies);
+        addPatientPage.addCf(cf);
 
-        home = page.clickSubmit();
-        //TODO
+        home = new HomePO(addPatientPage.clickSubmit());
+        AddPatientPO addPatientPage2 = new AddPatientPO(home.clickAddPatient());
+
+        addPatientPage2.addFirstname(firstname);
+        addPatientPage2.addLastname(lastname);
+        addPatientPage2.addWeight(weight.toString());
+        addPatientPage2.addHeight(height.toString());
+        addPatientPage2.addAge(age);
+        addPatientPage2.addBirthdate(birthdate);
+        addPatientPage2.addSex(sex);
+        addPatientPage2.addPhonenumber(phonenumber);
+        addPatientPage2.addEmail(email);
+        addPatientPage2.addAddress(address);
+        addPatientPage2.addAllergies(allergies);
+        addPatientPage2.addCf(cf);
+
+        ErrorPO err = new ErrorPO(addPatientPage2.clickSubmit());
+        Assert.assertEquals("Utente con lo stesso CF e' gia' registrato.", err.getErrorMessage());
+    }
+
+    @Test
+    public void addPatientCancel(){
+        HomePO home = new HomePO(driver);
+        home.loadPage();
+        AddPatientPO addPatPage = new AddPatientPO(home.clickAddPatient());
+        home = new HomePO(addPatPage.clickCancel());
+        Assert.assertFalse(home.isError());
+    }
+
+    @Test
+    public void addPatientNoValues(){
+        HomePO home = new HomePO(driver);
+        home.loadPage();
+        AddPatientPO addPatPage = new AddPatientPO(home.clickAddPatient());
+        ErrorPO errPage = new ErrorPO(addPatPage.clickSubmit());
+        Assert.assertTrue("Dovresti avere un errore perché non sono stati inseriti i valori!",
+                errPage.getErrorMessage().toLowerCase().contains("valori mancanti"));
     }
 
 }

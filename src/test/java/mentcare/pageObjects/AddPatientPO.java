@@ -111,14 +111,14 @@ public class AddPatientPO extends PageObject{
         this.boxcf.sendKeys(in);
     }
 
-    public HomePO clickSubmit(){
+    public WebDriver clickSubmit(){
         this.submitbutton.click();
-        return new HomePO(driver);
+        return driver;
     }
 
-    public HomePO clickCancel(){
+    public WebDriver clickCancel(){
         this.cancelbutton.click();
-        return new HomePO(driver);
+        return driver;
     }
 
 }

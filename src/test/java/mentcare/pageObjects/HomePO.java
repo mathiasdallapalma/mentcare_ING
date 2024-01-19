@@ -35,23 +35,27 @@ public class HomePO extends PageObject{
      * Si vuole andare alla pagina di un paziente specifico, l'input viene utilizzato per cercare nella tabella
      * il link con il nome e viene cliccato, reindirizzando la navigazione.
      */
-    public PatientViewPO clickName(String nameToClick){
+    public WebDriver clickName(String nameToClick){
         //TODO
         addpatientbutton.click();
-        return new PatientViewPO(driver);
+        return driver;
     }
 
     public void loadPage(){
         driver.get("localhost:8080/home");
     }
 
-    public AddPatientPO clickAddPatient(){
+    public WebDriver clickAddPatient(){
         addpatientbutton.click();
-        return new AddPatientPO(driver);
+        return driver;
     }
 
     public boolean isError() {
         return !driver.getCurrentUrl().equals("http://localhost:8080/home");
     }
 
+    public WebDriver clickReport() {
+        reportbutton.click();
+        return driver;
+    }
 }

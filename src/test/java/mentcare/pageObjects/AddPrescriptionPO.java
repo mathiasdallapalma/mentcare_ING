@@ -25,26 +25,28 @@ public class AddPrescriptionPO extends PageObject{
     private WebElement cancelbutton;
 
 
-    public void adddrug(String in){
+    public void addDrug(String in){
         this.boxdrug1.clear();
         this.boxdrug1.sendKeys(in);
     }
 
-    public void addquantity(Integer in){
+    public void addQuantity(Integer in){
         this.boxquantity1.clear();
         this.boxquantity1.sendKeys(in.toString());
     }
 
-    public void addnote(String in){
+    public void addNote(String in){
         this.boxnote1.clear();
         this.boxnote1.sendKeys(in);
     }
 
-    public void clickSubmit(){
+    public WebDriver clickSubmit(){
         this.submitbutton.click();
+        return driver;
     }
 
-    public void clickCancel(){
+    public WebDriver clickCancel(){
         this.cancelbutton.click();
+        return driver;
     }
 }
