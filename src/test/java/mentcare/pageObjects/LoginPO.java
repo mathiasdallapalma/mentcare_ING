@@ -6,10 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPO extends PageObject{
 
-    @FindBy(id = "username")
+    @FindBy(id = "username_input")
     private WebElement usernameField;
 
-    @FindBy(id = "password")
+    @FindBy(id = "password_input")
     private WebElement passwordField;
 
     @FindBy(id = "submit_btn")

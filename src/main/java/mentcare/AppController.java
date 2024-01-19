@@ -2,6 +2,11 @@ package mentcare;
 
 import mentcare.models.Patient;
 import mentcare.repositories.PatientRepository;
+<<<<<<< Updated upstream
+=======
+import mentcare.repositories.PrescriptionRepository;
+import mentcare.utils.Utils;
+>>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,26 @@ public class AppController {
     @RequestMapping("/")
     public String index(){
         return "list";
+    }
+
+    @RequestMapping("/login")
+    public String login(){
+
+
+        return "login";
+    }
+
+    @RequestMapping("/validateLogin")
+    public String update(
+            @RequestParam(name="username", required=true) String username,
+            @RequestParam(name="password", required=true) String password,
+            Model model) {
+        if(Utils.validateLogin(username,password))
+            return "redirect:/home";
+        else
+            model.addAttribute("error", "Username o password errati");
+            return "redirect:/error";
+
     }
 
     @RequestMapping("/input")
