@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.apache.commons.lang3.SystemUtils;
@@ -20,8 +21,8 @@ public class SystemTest {
     protected WebDriver driver;
     @Before
     public void setUp() {
-        org.openqa.selenium.chrome.ChromeOptions chrome_options = new ChromeOptions();
-        chrome_options.addArguments("--headless");
+
+        /*
         if(SystemUtils.IS_OS_WINDOWS){
             System.setProperty("webdriver.chrome.driver",
                     Paths.get("src/test/resources/chromedriver_win32_96/chromedriver.exe").toString());
@@ -34,8 +35,11 @@ public class SystemTest {
             System.setProperty("webdriver.chrome.driver",
                     Paths.get("src/test/resources/chromedriver_linux64_96/chromedriver").toString());
         }
+        */
+        System.setProperty("webdriver.gecko.driver",
+                Paths.get("src/test/resources/firefoxdriver_linux64_96/geckodriver").toString());
         if (driver == null)
-            driver = new ChromeDriver(chrome_options);
+            driver = new FirefoxDriver();
     }
 
 

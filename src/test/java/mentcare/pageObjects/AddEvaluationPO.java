@@ -31,9 +31,9 @@ public class AddEvaluationPO extends PageObject{
         super(d);
     }
 
-    public PatientViewPO clickSubmit(){
+    public WebDriver clickSubmit(){
         this.submitButton.click();
-        return new PatientViewPO(driver);
+        return driver;
     }
 
     public void insertDate(String date){

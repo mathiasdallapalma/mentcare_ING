@@ -29,6 +29,6 @@ public class AddPrescriptionTest extends SystemTest{
         AddPrescriptionPO addPrescription = paginaPaziente.clickAddPrescription();
 
         ErrorPO ret = new ErrorPO(addPrescription.clickSubmit());
-        Assert.assertTrue(ret.getErrorMessage().toLowerCase().contains("valori mancanti"));
+        Assert.assertTrue(ret.getErrorMessage().toLowerCase().contains("Username o password errati"));
     }
 }

@@ -9,6 +9,7 @@ package mentcare;
 import mentcare.pageObjects.AddEvaluationPO;
 import mentcare.pageObjects.ErrorPO;
 import mentcare.pageObjects.PatientViewPO;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +28,9 @@ public class EvaluationsTest extends SystemTest {
         addEvaluationPO.insertValue("1");//TODO rimmpiazzare con un enum
         addEvaluationPO.insertNotes("notes");
         addEvaluationPO.insertMotivation("motivation");
-        patientPO=addEvaluationPO.clickSubmit();
+
+
+        patientPO=new PatientViewPO(addEvaluationPO.clickSubmit());
 
         assertEquals("New evaluation expected", "2024-01-01,1,notes,motivation", patientPO.getLastEvaluation_toString());
     }
@@ -42,9 +45,9 @@ public class EvaluationsTest extends SystemTest {
         addEvaluationPO.insertValue("1");//TODO rimmpiazzare con un enum
         addEvaluationPO.insertNotes("notes");
         addEvaluationPO.insertMotivation("motivation");
-        ErrorPO errorPO=addEvaluationPO.clickSubmit();
+        ErrorPO errorPO=new ErrorPO(addEvaluationPO.clickSubmit());
 
-        assertEquals("Error expected", "Failed to insert Evaluation: future date", patientPO.getErrorMessage());
+        assertEquals("Error expected", "Failed to insert Evaluation: future date", errorPO.getErrorMessage());
 
 
     }

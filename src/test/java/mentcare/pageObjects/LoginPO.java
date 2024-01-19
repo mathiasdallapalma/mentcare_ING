@@ -19,9 +19,9 @@ public class LoginPO extends PageObject{
         super(d);
     }
 
-    public HomePO clickSubmit(){
+    public WebDriver clickSubmit(){
         this.submitButton.click();
-        return new HomePO(driver);
+        return driver;
     }
 
     public void insertUsername(String username){
