@@ -43,12 +43,12 @@ public class PatientViewTest extends SystemTest {
     }
 
     @Test
-    public void generatePatientReport() { //TODO
+    public void generatePatientReport() { 
         PatientViewPO patientViewPO = new PatientViewPO(driver);
         patientViewPO.loadWithID(1);
 
         ReportPO reportPO = patientViewPO.clickReport();
-        assertEquals("Report expected", "Gianfranco", patientViewPO.getName());
+        assertEquals("Report expected", "REPORT", reportPO.getTitle());
 
     }
 

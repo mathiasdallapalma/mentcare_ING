@@ -96,6 +96,9 @@ public class Patient {
     public String getCf() {
         return cf;
     }
+    public Long getId() {
+        return id;
+    }
 
     /**
      * Metodo controllo valori inseriti per inserimento corretto. Per i vari valori presenti si controlla
@@ -107,4 +110,6 @@ public class Patient {
         //TODO
         return null;
     }
+
+
 }

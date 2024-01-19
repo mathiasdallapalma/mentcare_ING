@@ -7,6 +7,7 @@ package mentcare;
 
 
 import mentcare.pageObjects.AddEvaluationPO;
+import mentcare.pageObjects.ErrorPO;
 import mentcare.pageObjects.PatientViewPO;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ public class EvaluationsTest extends SystemTest {
     @Test
     public void addEvaluationOK() {
         PatientViewPO patientPO = new PatientViewPO(driver);
-        patientPO.loadPage();
+        patientPO.loadWithID(1);
 
         AddEvaluationPO addEvaluationPO = patientPO.clickAddEvaluation();
 
@@ -33,7 +34,7 @@ public class EvaluationsTest extends SystemTest {
     @Test
     public void addEvaluationFAIL() {
         PatientViewPO patientPO = new PatientViewPO(driver);
-        patientPO.loadPage();
+        patientPO.loadWithID(1);
 
         AddEvaluationPO addEvaluationPO = patientPO.clickAddEvaluation();
 
