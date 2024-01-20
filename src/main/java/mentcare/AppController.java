@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AppController {
 
     @Autowired
-    private PatientRepository repository;
+    private PatientRepository patientRepository;
 
     @RequestMapping("/")
     public String index(){
@@ -64,14 +64,15 @@ public class AppController {
 
             Patient pat = new Patient(firstname, lastname, intweight, intheight, intage, birthdate, sex,
                     phonenumber, email, address, allergies, cf);
-            if(pat.selfCheck().isEmpty()) //.equals("") me lo corregge così
+            if(pat.selfCheck().isEmpty()) { //.equals("") me lo corregge così
+                patientRepository.save(pat);
                 return "home";
-            else{
-                model.addAttribute(pat.selfCheck());
+            }else{
+                model.addAttribute("error", pat.selfCheck());
                 return "error";
             }
         }catch (NumberFormatException e){
-            model.addAttribute("Errore valori mancanti: \n" + e);
+            model.addAttribute("error", "Errore valori mancanti: \n" + e);
             return "error";
         }
     }
