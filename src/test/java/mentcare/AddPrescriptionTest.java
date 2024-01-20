@@ -20,6 +20,8 @@ public class AddPrescriptionTest extends SystemTest{
 
         PatientViewPO ret = new PatientViewPO(addPrescription.clickSubmit());
         Assert.assertFalse("Dovevo essere nella pagina del paziente 1", ret.isError(1));
+
+        //TODO verificare che la prescrizione sia stata inserita nella tabella della pagina paziente, manca il metodo
     }
 
     @Test
