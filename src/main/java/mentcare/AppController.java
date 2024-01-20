@@ -2,13 +2,12 @@ package mentcare;
 
 import mentcare.models.Patient;
 import mentcare.repositories.PatientRepository;
-<<<<<<< Updated upstream
-=======
 import mentcare.repositories.PrescriptionRepository;
 import mentcare.utils.Utils;
->>>>>>> Stashed changes
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,9 +37,10 @@ public class AppController {
         if(Utils.validateLogin(username,password))
             return "redirect:/home";
         else
-            model.addAttribute("error", "Username o password errati");
-            return "redirect:/error";
-
+            model.addAttribute("error_title", "Login fallito");
+            model.addAttribute("error_message", "Username o password errati");
+            model.addAttribute("redirect_link", "/login");
+            return "error";
     }
 
     @RequestMapping("/input")
