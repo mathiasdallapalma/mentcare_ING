@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Evaluation {
@@ -31,6 +32,12 @@ public class Evaluation {
         return String.format(
                 "Evaluation[id=%d, date='%s', value='%s', notes='%s', motivation='%s', patient_id='%d']",
                 id, date, value, notes, motivation, patientID);
+    }
+
+    //TODO perchè in patient ritorna una mappa?
+    public boolean selfCheck(){
+        LocalDate date = LocalDate.parse(this.date);
+        return date.isBefore(LocalDate.now());
     }
 
     /* Getters */
