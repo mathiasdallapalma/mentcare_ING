@@ -9,13 +9,13 @@ public class AddPrescriptionPO extends PageObject{
         super(d);
     }
 
-    @FindBy(id = "boxdrug1")
+    @FindBy(id = "boxdrug")
     private WebElement boxdrug1;
 
-    @FindBy(id = "boxquantity1")
+    @FindBy(id = "boxquantity")
     private WebElement boxquantity1;
 
-    @FindBy(id = "boxnote1")
+    @FindBy(id = "boxnote")
     private WebElement boxnote1;
 
     @FindBy(id = "submitbutton")

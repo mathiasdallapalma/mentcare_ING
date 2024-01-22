@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
+
 @Entity
 public class Prescription {
 
@@ -46,6 +48,10 @@ public class Prescription {
 
     public Long getpatientID() {
         return patientID;
+    }
+
+    public String selfCheck(List<String> allergies){
+        return allergies.contains(this.drugs)? "Il paziente è allergico al medicinale ["+this.drugs+"] !" : null;
     }
 
 }
