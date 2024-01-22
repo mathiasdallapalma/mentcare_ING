@@ -31,4 +31,6 @@ public class AddPrescriptionTest extends SystemTest{
         ErrorPO ret = new ErrorPO(addPrescription.clickSubmit());
         Assert.assertTrue(ret.getErrorMessage().toLowerCase().contains("Username o password errati"));
     }
+
+    //TODO test per allergie
 }

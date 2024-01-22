@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -43,7 +44,7 @@ public class AppController {
     }
     */
 
-    @RequestMapping("/addPrescription/{idPatient}")
+    @RequestMapping("/patient/{idPatient}/addPrescription")
     public String addPrescription(Model model, @PathVariable(name="idPatient")Long idPatient){
         Optional<Patient> opt = patientRepository.findById(idPatient);
         if(opt.isPresent()){
@@ -52,23 +53,38 @@ public class AppController {
             model.addAttribute("prescriptions", prescriptionRepo.findByPatientID(idPatient));
             return "addPatient";
         }else {
-            model.addAttribute("error", "Il paziente con id ["+idPatient.toString()+"] Non è stato trovato :(\n");
+            model.addAttribute("error_title","Paziente non trovato");
+            model.addAttribute("error_message",
+                    "Il paziente con id ["+idPatient.toString()+"] Non è stato trovato :(\n");
+            model.addAttribute("redirect_link","/patient/"+idPatient.toString()+"/addPrescription");
             return "error";
         }
     }
 
-    @PostMapping("/addPrescription/{idPatient}")
+    @PostMapping("/patient/{idPatient}/addPrescription")
     public String addPrescription(Model model, @PathVariable(name="idPatient")Long idPatient,
                                   @RequestParam(name="drug")String drug,
-                                  @RequestParam(name="quantity")String quantity,
+                                  @RequestParam(name="quantity")Integer quantity,
                                   @RequestParam(name="note")String note){
-        try{
-            Integer quant = Integer.getInteger(quantity);
-            Prescription prescr = new Prescription(drug, quant, note, idPatient);
-            prescriptionRepo.save(prescr);
-            return "patientView/"+idPatient.toString();
-        }catch (NumberFormatException e){
-            model.addAttribute("error","e");
+
+        Prescription prescr = new Prescription(drug, quantity, note, idPatient);
+        if(patientRepository.findById(idPatient).isPresent()){
+            List<String> allergiesList = patientRepository.findById(idPatient).get().getAllergies();
+            String errorMsg = prescr.selfCheck(allergiesList);
+            if(errorMsg.isEmpty()){
+                prescriptionRepo.save(prescr);
+                return "patient/"+idPatient.toString(); //TODO: funziona così??
+            }else {
+                model.addAttribute("error_title","Inserimento prescrizione non riuscito");
+                model.addAttribute("error",errorMsg);
+                model.addAttribute("redirect_link","/patient/"+idPatient+"/addPrescription");
+                return "error";
+            }
+        }else{
+            model.addAttribute("error_title",
+                    "Inserimento prescrizione non riuscito");
+            model.addAttribute("error","Paziente con id ["+ idPatient.toString() +"] Non trovato");
+            model.addAttribute("redirect_link","patient/"+idPatient);
             return "error";
         }
     }
