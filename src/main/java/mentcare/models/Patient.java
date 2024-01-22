@@ -3,8 +3,8 @@ package mentcare.models;
 import mentcare.utils.MyUtils;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Patient {
@@ -28,13 +28,13 @@ public class Patient {
 
     protected Patient() {}
 
-    public Patient(String firstname, String lastname, Integer weight, Integer height, Integer age, String birthdate, String sex,
+    public Patient(String firstname, String lastname, Integer weight, Integer height, String birthdate, String sex,
                    String phonenumber, String email, String address, String allergies, String cf) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.weight = weight;
         this.height = height;
-        this.age = age;
+        this.age = calculateAge(birthdate);
         this.birthdate = birthdate;
         this.sex = sex;
         this.phonenumber = phonenumber;
@@ -42,6 +42,10 @@ public class Patient {
         this.address = address;
         this.allergies = getAllergiesList(allergies);
         this.cf = cf;
+    }
+
+    private Integer calculateAge(String bdate) {
+        return LocalDate.now().getYear() - LocalDate.parse(bdate).getYear();
     }
 
     private List<String> getAllergiesList(String allergies) {
@@ -103,11 +107,19 @@ public class Patient {
      * Metodo controllo valori inseriti per inserimento corretto. Per i vari valori presenti si controlla
      * la validità ad esempio peso > 0 e < 450 kg.
      * Per ogni voce, si aggiunge un messaggio di errore in base al campo sbagliato
-     * @return
      */
     public String selfCheck(){
-        //TODO
-        return "";
+        String errorToRet = "";
+        if(this.getWeight() > 300 || this.getWeight() < 0){
+            errorToRet = errorToRet.concat("Il peso inserito dovrebbe essere maggiore di 0 e minore di 300");
+        }
+        if(this.getHeight() > 250 || this.getHeight() < 0){
+            errorToRet = errorToRet.concat("L'altezza inserita dovrebbe essere maggiore di 0 e minore di 250");
+        }
+        if(this.getAge() > 150 || this.getAge() < 0){
+            errorToRet = errorToRet.concat("La data di nascita dovrebbe essere maggiore di 150 anni fa e minore dell'anno corrente");
+        }
+        return errorToRet;
     }
 
 

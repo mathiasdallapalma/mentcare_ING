@@ -39,7 +39,7 @@ public class AppController {
     private VisitRepository visitRepository;
 
 
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public String home(Model model) {
         Iterable<Visit> lVisite = visitRepository.findAll();
         model.addAttribute("visits", lVisite);
@@ -100,11 +100,6 @@ public class AppController {
         return "error";
     }
 
-    @RequestMapping("/input")
-    public String input() {
-        return "input"; //TODO: input fa riferimento a "inputOLD.html" da cambiare nome e la pagina
-    }
-
     @RequestMapping("/patient/{idPatient}/addPrescription")
     public String addPrescription(Model model, @PathVariable(name = "idPatient") Long idPatient) {
         Optional<Patient> opt = patientRepository.findById(idPatient);
@@ -154,9 +149,8 @@ public class AppController {
     public String addPatient(Model model,
                              @RequestParam(name = "firstname") String firstname,
                              @RequestParam(name = "lastname") String lastname,
-                             @RequestParam(name = "weight") String weight,
-                             @RequestParam(name = "height") String height,
-                             @RequestParam(name = "age") String age,
+                             @RequestParam(name = "weight") Integer weight,
+                             @RequestParam(name = "height") Integer height,
                              @RequestParam(name = "birthdate") String birthdate,
                              @RequestParam(name = "sex") String sex,
                              @RequestParam(name = "phonenumber") String phonenumber,
@@ -164,27 +158,15 @@ public class AppController {
                              @RequestParam(name = "address") String address,
                              @RequestParam(name = "allergies") String allergies,
                              @RequestParam(name = "cf") String cf) {
-
-        //TODO cambiare string to Integer e inserire "selfcheck()"
-        //TODO cambiare il file html type = text -> number per i 2 campi
-        //TODO togliere Età e calcola automaticamente con il birthdate
-        try {
-            //i valori inseriti dovrebbero essere int, ma se si inseriscono cose strane va in error
-            Integer intweight = Integer.decode(weight);
-            Integer intheight = Integer.decode(height);
-            Integer intage = Integer.decode(age);
-
-            Patient pat = new Patient(firstname, lastname, intweight, intheight, intage, birthdate, sex,
-                    phonenumber, email, address, allergies, cf);
-            if (pat.selfCheck().isEmpty()) { //.equals("") me lo corregge così
-                patientRepository.save(pat);
-                return "home";
-            } else {
-                model.addAttribute("error", pat.selfCheck());
-                return "error";
-            }
-        } catch (NumberFormatException e) {
-            model.addAttribute("error", "Errore valori mancanti: \n" + e);
+        Patient pat = new Patient(firstname, lastname, weight, height, birthdate, sex,
+                phonenumber, email, address, allergies, cf);
+        if (pat.selfCheck().isEmpty()) { //.equals("") me lo corregge così
+            patientRepository.save(pat);
+            return "home";
+        } else {
+            model.addAttribute("error_title", "Aggiunta paziente fallita");
+            model.addAttribute("error_message", pat.selfCheck());
+            model.addAttribute("redirect_link", "/home");
             return "error";
         }
     }
@@ -193,9 +175,7 @@ public class AppController {
     public String patientReport(
             @PathVariable(name = "id", required = true) Long id,
             Model model) {
-
         Optional<Patient> result = patientRepository.findById(id);
-
         if (result.isPresent()) {
             List<Prescription> prescriptions = prescriptionRepository.findByPatientID(id);
             List<Evaluation> evaluations = evaluationRepository.findByPatientID(id);
@@ -216,11 +196,6 @@ public class AppController {
             @PathVariable(name = "id", required = true) Long id,
             Model model
     ) {
-        //roba che serve per testare
-        Patient p = new Patient("Mario", "Rossi", 10, 10, 10, "10", "10", "10", "10", "10", "a,b,c", "asdw");
-        patientRepository.save(p);
-        //fine roba che serve per testare
-
         Optional<Patient> patient = patientRepository.findById(id);
 
         if (patient.isPresent()) {

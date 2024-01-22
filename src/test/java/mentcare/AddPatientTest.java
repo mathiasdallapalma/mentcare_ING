@@ -16,7 +16,6 @@ public class AddPatientTest extends SystemTest{
         String lastname = "Marroni";
         Integer weight = 70;
         Integer height = 170;
-        Integer age = 25;
         String birthdate = "default";
         String sex = "Femmina";
         String phonenumber = "123 4567890";
@@ -33,7 +32,6 @@ public class AddPatientTest extends SystemTest{
         addPatientPage.addLastname(lastname);
         addPatientPage.addWeight(weight.toString());
         addPatientPage.addHeight(height.toString());
-        addPatientPage.addAge(age);
         addPatientPage.addBirthdate(birthdate);
         addPatientPage.addSex(sex);
         addPatientPage.addPhonenumber(phonenumber);
@@ -52,8 +50,7 @@ public class AddPatientTest extends SystemTest{
         String lastname = "Di là";
         Integer weight = 700;
         Integer height = 1700;
-        Integer age = 400;
-        String birthdate = "default";
+        String birthdate = "05-03-1800";
         String sex = "Maschio";
         String phonenumber = "123 4567890";
         String email = "elicottero@rosacanina.com";
@@ -69,7 +66,6 @@ public class AddPatientTest extends SystemTest{
         addPatientPage.addLastname(lastname);
         addPatientPage.addWeight(weight.toString());
         addPatientPage.addHeight(height.toString());
-        addPatientPage.addAge(age);
         addPatientPage.addBirthdate(birthdate);
         addPatientPage.addSex(sex);
         addPatientPage.addPhonenumber(phonenumber);
@@ -79,10 +75,10 @@ public class AddPatientTest extends SystemTest{
         addPatientPage.addCf(cf);
 
         ErrorPO errPage = new ErrorPO(addPatientPage.clickSubmit());
-        String errMess = errPage.getErrorMessage();
+        String errMess = errPage.getErrorMessage().toLowerCase();
         Assert.assertTrue(errMess.contains("peso"));
         Assert.assertTrue(errMess.contains("altezza"));
-        Assert.assertTrue(errMess.contains("eta"));
+        Assert.assertTrue(errMess.contains("data di nascita"));
     }
 
     @Test
@@ -91,7 +87,6 @@ public class AddPatientTest extends SystemTest{
         String lastname = "Wick";
         Integer weight = 80;
         Integer height = 177;
-        Integer age = 35;
         String birthdate = "default";
         String sex = "Maschio";
         String phonenumber = "123 4567890";
@@ -108,7 +103,6 @@ public class AddPatientTest extends SystemTest{
         addPatientPage.addLastname(lastname);
         addPatientPage.addWeight(weight.toString());
         addPatientPage.addHeight(height.toString());
-        addPatientPage.addAge(age);
         addPatientPage.addBirthdate(birthdate);
         addPatientPage.addSex(sex);
         addPatientPage.addPhonenumber(phonenumber);
@@ -124,7 +118,6 @@ public class AddPatientTest extends SystemTest{
         addPatientPage2.addLastname(lastname);
         addPatientPage2.addWeight(weight.toString());
         addPatientPage2.addHeight(height.toString());
-        addPatientPage2.addAge(age);
         addPatientPage2.addBirthdate(birthdate);
         addPatientPage2.addSex(sex);
         addPatientPage2.addPhonenumber(phonenumber);

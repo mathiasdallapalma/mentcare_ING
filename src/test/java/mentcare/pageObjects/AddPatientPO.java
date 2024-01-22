@@ -21,9 +21,6 @@ public class AddPatientPO extends PageObject{
     @FindBy(id = "height_input")
     private WebElement boxheight;
 
-    @FindBy(id = "age_input")
-    private WebElement boxage;
-
     @FindBy(id = "birthdate_input")
     private WebElement boxbirthdate;
 
@@ -69,11 +66,6 @@ public class AddPatientPO extends PageObject{
     public void addHeight(String in){
         this.boxheight.clear();
         this.boxheight.sendKeys(in);
-    }
-
-    public void addAge(Integer in){
-        this.boxage.clear();
-        this.boxage.sendKeys(in.toString());
     }
 
     public void addBirthdate(String in){
