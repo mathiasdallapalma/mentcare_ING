@@ -61,19 +61,20 @@ public class AppController {
     public String validateEvaluation(
             @PathVariable(name="id", required=true) Long patientID,
             @RequestParam(name="date", required=true) String data,
-            @RequestParam(name="value", required=true) String value,
+            @RequestParam(name="value", required=true) Integer value,
             @RequestParam(name="motivation", required=true) String motivation,
             @RequestParam(name="notes", required=true) String notes,
             Model model) {
 
         Evaluation evaluation = new Evaluation(data,value,notes,motivation,patientID);
-        if(evaluation.selfCheck()) {
+        String error = evaluation.selfCheck();
+        if(error.isEmpty()){
             evaluationRepository.save(evaluation);
             return "redirect:/patient/{id}";
         }
         else {
             model.addAttribute("error_title", "Aggiunta valutazione fallita");
-            model.addAttribute("error_message", "msg"); //TODO messaggio di errore
+            model.addAttribute("error_message", error);
             model.addAttribute("redirect_link", "/patient/"+patientID+"/addEvaluation");
             System.out.println("Error");
             return "error";

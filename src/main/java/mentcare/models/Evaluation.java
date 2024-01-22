@@ -12,14 +12,14 @@ public class Evaluation {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String date;
-    private String value;
+    private Integer value; //è tipo il voto che il dottore da al paziente in quella visita
     private String notes;
     private String motivation;
     private Long patientID;
 
     protected Evaluation() {}
 
-    public Evaluation(String date, String value, String notes, String motivation, Long patientID) {
+    public Evaluation(String date, Integer value, String notes, String motivation, Long patientID) {
         this.date = date;
         this.value = value;
         this.notes = notes;
@@ -34,10 +34,28 @@ public class Evaluation {
                 id, date, value, notes, motivation, patientID);
     }
 
-    //TODO perchè in patient ritorna una mappa?
-    public boolean selfCheck(){
-        LocalDate date = LocalDate.parse(this.date);
-        return date.isBefore(LocalDate.now());
+    //TODO risolvi i \n non caricati dalla pagina
+    public String selfCheck(){
+        String error= "";
+        if(this.date.isEmpty()){
+            error= error.concat("\nLa data non può essere vuota\n");
+
+        }else{
+            LocalDate date = LocalDate.parse(this.date);
+            if(date.isAfter(LocalDate.now()))
+            {
+                error= error.concat("\nLa data non può essere nel passato\n");
+            }
+        }
+
+        if(this.value<0 || this.value>50)
+        {
+            error= error.concat("\nIl valore deve essere compreso tra 0 e 50\n");
+        }
+        if(this.motivation.isEmpty()){
+            error= error.concat("\nLa motivazione non può essere vuota\n");
+        }
+        return error;
     }
 
     /* Getters */
@@ -47,7 +65,7 @@ public class Evaluation {
     public String getDate() {
         return date;
     }
-    public String getValue() {
+    public Integer getValue() {
         return value;
     }
     public String getNotes() {
