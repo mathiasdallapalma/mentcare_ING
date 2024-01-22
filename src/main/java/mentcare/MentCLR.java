@@ -1,8 +1,12 @@
 package mentcare;
 
+import mentcare.models.Evaluation;
 import mentcare.models.Patient;
+import mentcare.models.Prescription;
 import mentcare.models.Visit;
+import mentcare.repositories.EvaluationRepository;
 import mentcare.repositories.PatientRepository;
+import mentcare.repositories.PrescriptionRepository;
 import mentcare.repositories.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,12 +15,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class MentCLR implements CommandLineRunner {
 
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Autowired
-    PatientRepository patientRepo;
+    private PrescriptionRepository prescriptionRepository;
 
     @Autowired
-    VisitRepository visitRepo;
+    private EvaluationRepository evaluationRepository;
+
+    @Autowired
+    private VisitRepository visitRepository;
+
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -24,16 +35,49 @@ public class MentCLR implements CommandLineRunner {
                 "maschio", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "lattice","BBB");
 
-        Patient p2 = new Patient("Jane", "Doe", 60, 160, 20, "20 04 2000",
+        Evaluation e1 = new Evaluation("01/01/2024", 30, "note", "urgenza", p1.getId());
+        Evaluation e2 = new Evaluation("02/01/2024", 10, "note", "prenotata", p1.getId());
+        Evaluation e3 = new Evaluation("03/01/2024", 45, "note", "prenotata", p1.getId());
+
+        Prescription pr1 = new Prescription("Tachipirina", 10, "note", p1.getId());
+        Prescription pr2 = new Prescription("Tachipirina", 20, "note", p1.getId());
+        Prescription pr3 = new Prescription("Luxopedrina", 30, "note", p1.getId());
+
+        patientRepository.save(p1);
+        evaluationRepository.save(e1);
+        evaluationRepository.save(e2);
+        evaluationRepository.save(e3);
+        prescriptionRepository.save(pr1);
+        prescriptionRepository.save(pr2);
+        prescriptionRepository.save(pr3);
+
+        p1 = new Patient("Jane", "Doe", 60, 160, 20, "20 04 2000",
                 "femmina", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "api","CCC");
-        patientRepo.save(p1);
-        patientRepo.save(p2);
+        e1 = new Evaluation("05/01/2024", 20, "note", "urgenza", p1.getId());
+        e2 = new Evaluation("12/01/2024", 20, "note", "urgenza", p1.getId());
+        e3 = new Evaluation("13/01/2024", 50, "note", "prenotata", p1.getId());
+
+        pr1 = new Prescription("Acitofolina", 25, "note", p1.getId());
+        pr2 = new Prescription("Epifrilina", 20, "note", p1.getId());
+        pr3 = new Prescription("Luxopedrina", 40, "note", p1.getId());
+
+        patientRepository.save(p1);
+        evaluationRepository.save(e1);
+        evaluationRepository.save(e2);
+        evaluationRepository.save(e3);
+        prescriptionRepository.save(pr1);
+        prescriptionRepository.save(pr2);
+        prescriptionRepository.save(pr3);
+
+
+
         Visit v1 = new Visit("2/2/24", "10:30", "E-PT", "John Doe");
         Visit v2 = new Visit("2/2/24", "12:30", "E-PT", "Mario Rossi");
         Visit v3 = new Visit("4/3/24", "17:30", "G-P1", "Luigi verdi");
-        visitRepo.save(v1);
-        visitRepo.save(v2);
-        visitRepo.save(v3);
+        visitRepository.save(v1);
+        visitRepository.save(v2);
+        visitRepository.save(v3);
+
     }
 }
