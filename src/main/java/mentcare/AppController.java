@@ -7,16 +7,10 @@ import mentcare.repositories.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import mentcare.models.Prescription;
-import mentcare.repositories.PatientRepository;
 import mentcare.repositories.PrescriptionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,7 +29,7 @@ public class AppController {
     @Autowired
     private VisitRepository visitRepo;
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String home(Model model){
         Iterable<Visit> lVisite = visitRepo.findAll();
         model.addAttribute("visits", lVisite);
@@ -110,6 +104,9 @@ public class AppController {
             @RequestParam(name="allergies")String allergies,
             @RequestParam(name="cf")String cf){
 
+        //TODO cambiare string to Integer e inserire "selfcheck()"
+        //TODO cambiare il file html type = text -> number per i 2 campi
+        //TODO togliere Età e calcola automaticamente con il birthdate
         try{
             //i valori inseriti dovrebbero essere int, ma se si inseriscono cose strane va in error
             Integer intweight = Integer.decode(weight);
