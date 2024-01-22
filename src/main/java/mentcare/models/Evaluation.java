@@ -34,17 +34,16 @@ public class Evaluation {
                 id, date, value, notes, motivation, patientID);
     }
 
-    //TODO risolvi i \n non caricati dalla pagina
     public String selfCheck(){
         String error= "";
         if(this.date.isEmpty()){
-            error= error.concat("\nLa data non può essere vuota\n");
+            error= error.concat("La data non può essere vuota<br>");
 
         }else{
             LocalDate date = LocalDate.parse(this.date);
             if(date.isAfter(LocalDate.now()))
             {
-                error= error.concat("\nLa data non può essere nel passato\n");
+                error= error.concat("La data non può essere nel passato<br>");
             }
         }
 

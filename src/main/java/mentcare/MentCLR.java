@@ -31,7 +31,7 @@ public class MentCLR implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Patient p1 = new Patient("John", "Doe", 70, 170, 26, "14 03 1998",
+        Patient p1 = new Patient("John", "Doe", 70, 170,  "2000-04-20",
                 "maschio", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "lattice","BBB");
 
@@ -51,7 +51,7 @@ public class MentCLR implements CommandLineRunner {
         prescriptionRepository.save(pr2);
         prescriptionRepository.save(pr3);
 
-        p1 = new Patient("Jane", "Doe", 60, 160, 20, "20 04 2000",
+        p1 = new Patient("Jane", "Doe", 60, 160, "2000-04-20",
                 "femmina", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "api","CCC");
         e1 = new Evaluation("05/01/2024", 20, "note", "urgenza", p1.getId());

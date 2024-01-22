@@ -12,6 +12,7 @@ import mentcare.repositories.EvaluationRepository;
 
 import mentcare.utils.MyUtils;
 
+import mentcare.utils.VerificaLoginMOCK;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +92,8 @@ public class AppController {
             @RequestParam(name = "username", required = true) String username,
             @RequestParam(name = "password", required = true) String password,
             Model model) {
-        if (MyUtils.validateLogin(username, password)) //TODO sostituire con mock
+        VerificaLoginMOCK verificaLogin = new VerificaLoginMOCK();
+        if (verificaLogin.checkLogin(username, password)) //TODO sostituire con mock
             return "redirect:/home";
         else
             model.addAttribute("error_title", "Login fallito");
@@ -162,7 +164,7 @@ public class AppController {
                 phonenumber, email, address, allergies, cf);
         if (pat.selfCheck().isEmpty()) { //.equals("") me lo corregge così
             patientRepository.save(pat);
-            return "home";
+            return "redirect:/home";
         } else {
             model.addAttribute("error_title", "Aggiunta paziente fallita");
             model.addAttribute("error_message", pat.selfCheck());
@@ -180,7 +182,7 @@ public class AppController {
             List<Prescription> prescriptions = prescriptionRepository.findByPatientID(id);
             List<Evaluation> evaluations = evaluationRepository.findByPatientID(id);
 
-            String report = MyUtils.generateReport(result.get(), prescriptions, evaluations);
+            String report = MyUtils.generatePatientReport(result.get(), prescriptions, evaluations);
             model.addAttribute("report", report);
             return "report";
         } else {

@@ -1,6 +1,7 @@
 package mentcare.models;
 
 import mentcare.utils.MyUtils;
+import net.sf.cglib.core.Local;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -45,6 +46,10 @@ public class Patient {
     }
 
     private Integer calculateAge(String bdate) {
+        System.out.println(bdate);
+        LocalDate now = LocalDate.now();
+        LocalDate birthdate = LocalDate.parse(bdate);
+        System.out.println(birthdate);
         return LocalDate.now().getYear() - LocalDate.parse(bdate).getYear();
     }
 
@@ -110,7 +115,7 @@ public class Patient {
      */
     public String selfCheck(){
         String errorToRet = "";
-        if(this.getWeight() > 300 || this.getWeight() < 0){
+        if(weight > 300 || weight < 0){
             errorToRet = errorToRet.concat("Il peso inserito dovrebbe essere maggiore di 0 e minore di 300");
         }
         if(this.getHeight() > 250 || this.getHeight() < 0){

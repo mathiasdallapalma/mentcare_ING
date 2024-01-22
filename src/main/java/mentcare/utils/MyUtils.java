@@ -13,18 +13,13 @@ public class MyUtils {
         return Arrays.asList(all.split(","));
     }
 
-    public static String generatePatientReport(Patient patient){
-        //TODO
-        return "";
-    }
 
     public static String generateGeneralReport(Iterable<Patient> patients){
         //TODO
         return "";
     }
 
-    public static String generateReport(Patient patient, List<Prescription> prescriptions, List<Evaluation> evaluations) {
-        //TODO
+    public static String generatePatientReport(Patient patient, List<Prescription> prescriptions, List<Evaluation> evaluations) {
 
         HashMap<String, Integer> mapDrugs=new HashMap<>();
         for (Prescription p:prescriptions) {
@@ -76,14 +71,7 @@ public class MyUtils {
 
                 "}<br>";
 
-
-
-
         return res;
-
-
-
-        //TODO evaluations and prescriptions
     }
 
 
