@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bootstrap 4, from LayoutIt!</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+	  <link rel="stylesheet" th:href="@{/css/login.css}" />
+
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>
+				MentCare
+			</h1>
+			<div>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+
+				</div>
+				<div class="col-md-4">
+					<form action="validateLogin" method="post">
+							<label>Username:
+							<input type="text" class="form-control" id="username_input" name="username">
+						</label><br>
+							<label>Password:
+							<input type="text" class="form-control" id="password_input" name="password">
+						</label><br>
+							<input type="submit" id="submit_btn" />
+					</form>
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+  </body>
+</html>
