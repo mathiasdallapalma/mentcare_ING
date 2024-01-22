@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Patient</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+	<link rel="stylesheet" th:href="@{/css/patientView.css}" />
+
+  </head>
+  <body>
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded-circle">
+		</div>
+		<div class="col-md-8">
+
+			<a th:href="${patient.id}+'/report'" id="report_btn">
+				<button type="button" class="btn btn-success">
+					Report
+				</button>
+			</a>
+
+			<h3 id="name" th:text="${patient.firstname}+' '+${patient.lastname}">
+				Giancarlo Rossi
+			</h3>
+			<p th:utext="
+				'<b>Data di nascita: </b>'+${patient.birthdate}+'<b> Peso: </b>'+${patient.weight}+'Kg <b>Altezza: </b>'+${patient.height}+' Cm'
+				">
+			</p>
+			<p th:text="
+				${patient.address}">
+			</p>
+			<p th:text="
+				${patient.phonenumber}+' '+${patient.email}">
+			</p>
+			<p th:utext="'<b>Allergie: </b>'+${patient.allergies}
+				">
+			</p>
+		</div>
+	</div>
+		<div>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+	<div class="row">
+		<div class="col-md-6">
+			<a href="addEvaluation" id="add_evaluation_btn">
+			<button type="button" class="btn btn-success">
+				Aggiungi Valutazione
+			</button>
+			</a>
+			<table class="table" id="evaluations_table">
+				<thead>
+					<tr>
+						<th>
+							Data
+						</th>
+						<th>
+							Valore
+						</th>
+						<th>
+							Motivazione
+						</th>
+						<th>
+							Note
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:each="evaluation: ${evaluations}">
+					<td th:text="${evaluation.date}"> <b>01/01/2024 </b></td>
+					<td th:text="${evaluation.value}"> 10 </td>
+					<td th:text="${evaluation.motivation}"> urgenza </td>
+					<td th:text="${evaluation.notes}"> <b>note </b></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<a href="addPrescription" id="add_prescription_btn">
+			<button type="button" class="btn btn-success">
+				Aggiungi Prescrizione
+			</button>
+			</a>
+			<table class="table" id="prescription_table">
+				<thead>
+					<tr>
+						<th>
+							Medicina
+						</th>
+						<th>
+							Quantità
+						</th>
+						<th>
+							Note
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:each="prescription: ${prescriptions}">
+					<td th:text="${prescription.drugs}"> <b>01/01/2024 </b></td>
+					<td th:text="${prescription.quantity}"> 10 </td>
+					<td th:text="${prescription.notes}"> <b>note </b></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

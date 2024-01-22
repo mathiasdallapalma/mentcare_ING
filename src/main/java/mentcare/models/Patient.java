@@ -1,6 +1,6 @@
 package mentcare.models;
 
-import mentcare.utils.Utils;
+import mentcare.utils.MyUtils;
 
 import javax.persistence.*;
 import java.util.List;
@@ -45,7 +45,7 @@ public class Patient {
     }
 
     private List<String> getAllergiesList(String allergies) {
-        return Utils.createAllergiesList(allergies);
+        return MyUtils.createAllergiesList(allergies);
     }
 
     public String getFirstname() {

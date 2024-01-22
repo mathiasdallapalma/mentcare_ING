@@ -11,14 +11,14 @@ public class Evaluation {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String date;
-    private String value;
+    private Integer value;
     private String notes;
     private String motivation;
     private Long patientID;
 
     protected Evaluation() {}
 
-    public Evaluation(String date, String value, String notes, String motivation, Long patientID) {
+    public Evaluation(String date, Integer value, String notes, String motivation, Long patientID) {
         this.date = date;
         this.value = value;
         this.notes = notes;
@@ -40,7 +40,7 @@ public class Evaluation {
     public String getDate() {
         return date;
     }
-    public String getValue() {
+    public Integer getValue() {
         return value;
     }
     public String getNotes() {
