@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bootstrap 4, from LayoutIt!</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link th:href="@{/css/addEvaluation.css}" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 th:text="'Aggiungi valutazione per '+${patient.firstname}+' '+${patient.lastname}">
+				h3. Lorem ipsum dolor sit amet.
+			</h3>
+			<form role="form" action="validateEvaluation" method="post">
+				<div class="form-group">
+					 
+					<label for="date_input">
+						Date
+					</label>
+					<input type="date" class="form-control" id="date_input" name="date">
+				</div>
+				<div class="form-group">
+					 
+					<label for="motivation_input">
+						Motivation
+					</label>
+					<input type="text" class="form-control" id="motivation_input" name="motivation">
+				</div>
+				<div class="form-group">
+
+					<label for="value_input">
+						Value
+					</label>
+					<input type="range" class="form-control" id="value_input" min="0" max="50" name="value">
+				</div>
+				<div class="form-group">
+
+					<label for="note_input">
+						Note
+					</label>
+					<input type="text" class="form-control" id="note_input" name="notes">
+				</div>
+				<button type="submit" class="btn btn-primary" id="submit_btn">
+					Submit
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
