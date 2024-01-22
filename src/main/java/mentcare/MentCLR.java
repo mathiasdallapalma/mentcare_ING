@@ -70,8 +70,6 @@ public class MentCLR implements CommandLineRunner {
         prescriptionRepository.save(pr2);
         prescriptionRepository.save(pr3);
 
-
-
         Visit v1 = new Visit("2/2/24", "10:30", "E-PT", "John Doe");
         Visit v2 = new Visit("2/2/24", "12:30", "E-PT", "Mario Rossi");
         Visit v3 = new Visit("4/3/24", "17:30", "G-P1", "Luigi verdi");

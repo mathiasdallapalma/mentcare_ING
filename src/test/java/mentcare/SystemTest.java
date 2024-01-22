@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.apache.commons.lang3.SystemUtils;
@@ -22,6 +23,10 @@ public class SystemTest {
     @Before
     public void setUp() {
 
+        FirefoxOptions options = new FirefoxOptions();
+        //options.addArguments("--headless");
+
+
         /*
         if(SystemUtils.IS_OS_WINDOWS){
             System.setProperty("webdriver.chrome.driver",
@@ -37,9 +42,9 @@ public class SystemTest {
         }
         */
         System.setProperty("webdriver.gecko.driver",
-                Paths.get("src/test/resources/firefoxdriver_linux64_96/geckodriver").toString());
+                Paths.get("src/test/resources/gekodriver/geckodriver").toString());
         if (driver == null)
-            driver = new FirefoxDriver();
+            driver = new FirefoxDriver(options);
     }
 
 
