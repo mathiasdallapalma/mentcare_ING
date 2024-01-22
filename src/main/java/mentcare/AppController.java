@@ -1,9 +1,13 @@
 package mentcare;
 
 import mentcare.models.Patient;
+import mentcare.models.Visit;
 import mentcare.repositories.PatientRepository;
+import mentcare.repositories.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -11,12 +15,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AppController {
 
     @Autowired
-    private PatientRepository repository;
+    private PatientRepository patientRepository;
 
-    @RequestMapping("/")
-    public String index(){
-        return "list";
+    @Autowired
+    private VisitRepository visitRepo;
+
+    @GetMapping("/")
+    public String home(Model model){
+        Iterable<Visit> lVisite = visitRepo.findAll();
+        model.addAttribute("visits", lVisite);
+        Iterable<Patient> lPatients = patientRepository.findAll();
+        model.addAttribute("patients", lPatients);
+        return "home";
     }
+
+    @GetMapping("/greeting")
+    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "greeting";
+    }
+
 
     @RequestMapping("/input")
     public String input(){

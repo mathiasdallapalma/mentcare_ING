@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home</title>
+
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
+
+</head>
+<style>
+    table, th, td {
+  border: 1px solid black;
+}
+    button{
+    padding: 4px
+    }
+</style>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 id="title" >Home</h1>
+            <div>
+                <a id="reportbutton" href="report">
+                    <button type="button" value="Report" class="btn btn-success"> report</button>
+                </a>
+            </div>
+            <br>
+            <div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="row">
+        <a id="addpatientbutton" href="addPatient">
+            <button type="button" value="Add patient" class="btn btn-success"> Add Patient</button>
+        </a>
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Cognome
+                    </th>
+                    <th>
+                        Età
+                    </th>
+                    <th>
+                        Sesso
+                    </th>
+                    <th>
+                        Indirizzo
+                    </th>
+                    <th>
+                        CF
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="patient: ${patients}">
+                    <td th:text="${patient.firstname}"> John </td>
+                    <td th:text="${patient.lastname}"> Doe </td>
+                    <td th:text="${patient.age}"> 45 </td>
+                    <td th:text="${patient.sex}"> Maschio</td>
+                    <td th:text="${patient.address}"> Via vittoria 2 </td>
+                    <td th:text="${patient.cf}"> AAA </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-success" value="Aggiungi visita"> Aggiungi Visita </button>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Medicina
+                    </th>
+                    <th>
+                        Quantità
+                    </th>
+                    <th>
+                        Note
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="visit: ${visits}">
+                    <td th:text="${visit.day}"> 01/01/2024 </td>
+                    <td th:text="${visit.time}"> 10:30 </td>
+                    <td th:text="${visit.room}"> 10 </td>
+                    <td th:text="${visit.patient}"> John Doe</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
