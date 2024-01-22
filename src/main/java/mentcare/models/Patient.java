@@ -106,9 +106,9 @@ public class Patient {
      * Per ogni voce, si aggiunge un messaggio di errore in base al campo sbagliato
      * @return
      */
-    public Map<String, String> selfCheck(){
+    public String selfCheck(){
         //TODO
-        return null;
+        return "";
     }
 
 
