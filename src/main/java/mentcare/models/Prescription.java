@@ -51,7 +51,7 @@ public class Prescription {
     }
 
     public String selfCheck(List<String> allergies){
-        return allergies.contains(this.drugs)? "Il paziente è allergico al medicinale ["+this.drugs+"] !" : null;
+        return allergies.contains(this.drugs)? "Il paziente è allergico al medicinale ["+this.drugs+"] !" : "";
     }
 
 }

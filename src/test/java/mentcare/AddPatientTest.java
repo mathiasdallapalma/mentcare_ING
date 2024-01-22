@@ -41,7 +41,7 @@ public class AddPatientTest extends SystemTest{
         addPatientPage.addCf(cf);
 
         HomePO home2 = new HomePO(addPatientPage.clickSubmit());
-        Assert.assertTrue(home2.getTableLastRow().contains(firstname)); //non sono sicuro sia corretto
+        Assert.assertTrue(home2.isCfPresent().contains(firstname)); //non sono sicuro sia corretto
     }
 
     @Test

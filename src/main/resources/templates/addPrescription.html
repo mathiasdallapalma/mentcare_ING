@@ -7,40 +7,16 @@
 
 <body>
 <div>
-    <div>Nome paziente: <span th:text="${name}">[nome]</span></div><br><br>
+    <br><br>
+    <h3>Nome paziente: <span th:text="${name}">[nome]</span></h3><br><br>
 </div>
 
-<div>
-    <table class="table" id="evaluations_table">
-        <thead>
-        <tr>
-            <th>
-                Medicina
-            </th>
-            <th>
-                Quantità
-            </th>
-            <th>
-                Note
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="prescr: ${prescriptions}">
-            <td th:text="${prescr.drugs}"> <b>01/01/2024 </b></td>
-            <td th:text="${prescr.quantity}"> 10 </td>
-            <td th:text="${prescr.notes}"> <b>note </b></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<form th:action="addPrescription/${idPatient}" method="post">
+<form th:action="'/patient/'+${idPatient}+'/addPrescription'" method="post">
     Medicina : <input id="boxdrug" type="text" name="drug"><br><br>
-    Quantità : <input id="boxquantity" type="text" name="quantity"><br><br>
+    Quantità : <input id="boxquantity" type="number" name="quantity"> mg<br><br>
     Nota : <input id="boxnote" type="text" name="note"><br><br>
     <input id="submitbutton" type="submit" />
-    <a id="cancelbutton" th:href="/patient/${idPatient}">
+    <a id="cancelbutton" th:href="'/patient/'+${idPatient}">
         <button>Cancel</button>
     </a>
 </form>

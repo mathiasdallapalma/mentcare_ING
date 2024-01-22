@@ -22,7 +22,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1 id="title" >Home</h1>
+            <h1>Home</h1>
             <div>
                 <a id="reportbutton" href="report">
                     <button type="button" value="Report" class="btn btn-success"> Report</button>
@@ -72,7 +72,7 @@
                     <td th:text="${patient.age}"> 45 </td>
                     <td th:text="${patient.sex}"> Maschio</td>
                     <td th:text="${patient.address}"> Via vittoria 2 </td>
-                    <td th:text="${patient.cf}"> AAA </td>
+                    <td><a id="${patient.cf}" th:href="'/patient/'+${patient.id}" th:text="${patient.cf}"> cf </a></td>
                 </tr>
                 </tbody>
             </table>
@@ -93,6 +93,9 @@
                     </th>
                     <th>
                         Note
+                    </th>
+                    <th>
+                        Paziente
                     </th>
                 </tr>
                 </thead>

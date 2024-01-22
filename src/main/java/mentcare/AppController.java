@@ -109,7 +109,7 @@ public class AppController {
             model.addAttribute("idPatient", idPatient);
             model.addAttribute("name", opt.get().getFirstname() + " " + opt.get().getLastname());
             model.addAttribute("prescriptions", prescriptionRepository.findByPatientID(idPatient));
-            return "addPatient";
+            return "addPrescription";
         } else {
             model.addAttribute("error_title", "Paziente non trovato");
             model.addAttribute("error_message",
@@ -131,7 +131,7 @@ public class AppController {
             String errorMsg = prescr.selfCheck(allergiesList);
             if (errorMsg.isEmpty()) {
                 prescriptionRepository.save(prescr);
-                return "patient/" + idPatient.toString(); //TODO: funziona così??
+                return "redirect:/patient/" + idPatient.toString(); //TODO: funziona così??
             } else {
                 model.addAttribute("error_title", "Inserimento prescrizione non riuscito");
                 model.addAttribute("error", errorMsg);

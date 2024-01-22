@@ -37,8 +37,7 @@
 			<p th:text="
 				${patient.address}">
 			</p>
-			<p th:text="
-				${patient.phonenumber}+' '+${patient.email}">
+			<p th:text="'Phone: '+${patient.phonenumber}+' Email: '+${patient.email}">
 			</p>
 			<p th:utext="'<b>Allergie: </b>'+${patient.allergies}
 				">
@@ -53,7 +52,7 @@
 		</div>
 	<div class="row">
 		<div class="col-md-6">
-			<a href="addEvaluation" id="add_evaluation_btn">
+			<a th:href="${patient.id}+'/addEvaluation'" id="add_evaluation_btn">
 			<button type="button" class="btn btn-success">
 				Aggiungi Valutazione
 			</button>
@@ -86,7 +85,7 @@
 			</table>
 		</div>
 		<div class="col-md-6">
-			<a href="addPrescription" id="add_prescription_btn">
+			<a th:href="${patient.id}+'/addPrescription'" id="add_prescription_btn">
 			<button type="button" class="btn btn-success">
 				Aggiungi Prescrizione
 			</button>
