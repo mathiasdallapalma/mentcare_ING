@@ -34,6 +34,7 @@ public class MentCLR implements CommandLineRunner {
         Patient p1 = new Patient("John", "Doe", 70, 170,  "2000-04-20",
                 "maschio", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "lattice","BBB");
+
         patientRepository.save(p1);
 
         Evaluation e1 = new Evaluation("01/01/2024", 30, "note", "urgenza", p1.getId());
@@ -54,7 +55,9 @@ public class MentCLR implements CommandLineRunner {
         p1 = new Patient("Jane", "Doe", 60, 160, "2000-04-20",
                 "femmina", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "api","CCC");
+
         patientRepository.save(p1);
+        
         e1 = new Evaluation("05/01/2024", 20, "note", "urgenza", p1.getId());
         e2 = new Evaluation("12/01/2024", 20, "note", "urgenza", p1.getId());
         e3 = new Evaluation("13/01/2024", 50, "note", "prenotata", p1.getId());

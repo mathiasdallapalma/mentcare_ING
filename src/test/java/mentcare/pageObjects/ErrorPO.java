@@ -9,11 +9,17 @@ public class ErrorPO extends PageObject{
         super(d);
     }
 
-    @FindBy(id = "error_text")
-    private WebElement error_text;
+    @FindBy(id = "error_title")
+    private WebElement error_title;
+
+    @FindBy(id = "error_message")
+    private WebElement error_message;
 
     public String getErrorMessage(){
-        return error_text.getText();
+        return error_message.getText();
     }
 
+    public String getTitle() {
+        return error_title.getText();
+    }
 }

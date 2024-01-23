@@ -19,7 +19,7 @@ public class HomePO extends PageObject{
     @FindBy(id = "addpatientbutton")
     private WebElement addpatientbutton;
 
-    @FindBy(id = "title")
+    @FindBy(id= "title")
     private WebElement title;
 
     /*@FindBy(xpath = "//tr[td//text()[contains(., 'targetString')]]")
@@ -39,7 +39,9 @@ public class HomePO extends PageObject{
     }
 
     public String getTitle(){
+        System.out.println(title);
         return title.getText();
+
     }
 
     /**

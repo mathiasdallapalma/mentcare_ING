@@ -28,20 +28,20 @@ public class LoginTest extends SystemTest {
         loginPO.insertPassword("admin");
         HomePO homepagePO=new HomePO(loginPO.clickSubmit());
 
-        assertEquals("Patient list message expected", "Patient list", homepagePO.getTitle());
+        assertEquals("Title page", "Home", homepagePO.getTitle());
     }
 
+    @Test
     public void testLoginFAIL() {
         LoginPO loginPO = new LoginPO(driver);
         loginPO.gotoLink();
 
         loginPO.insertUsername("admin");
-        loginPO.insertPassword("");
+        loginPO.insertPassword("...");
 
-        ErrorPO ret = new ErrorPO(loginPO.clickSubmit());
-        Assert.assertTrue(ret.getErrorMessage().toLowerCase().contains("valori mancanti"));
-        Assert.assertTrue(ret.getErrorMessage().toLowerCase().contains(""));
-        //assertEquals("Login failed, status code:", "Login failed", errorPO.getErrorMessage());
+        ErrorPO errorPO = new ErrorPO(loginPO.clickSubmit());
+
+        assertEquals("Tile page", "Login fallito", errorPO.getTitle());
     }
 
 }
