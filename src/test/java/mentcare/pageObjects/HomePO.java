@@ -28,14 +28,14 @@ public class HomePO extends PageObject{
     */
 
     public boolean isCfPresent(String cf){
-        /*
+        
         try {
             WebElement tmp = driver.findElement(By.id(cf));
             return true;
         }catch (NoSuchElementException e){
             return false;
-        }*/
-        return driver.findElements(By.xpath("/tbody[1]/tr/td")).getLast().getText().contains(cf);
+        }
+        //return driver.findElements(By.xpath("/tbody[1]/tr/td")).getLast().getText().contains(cf);
     }
 
     public String getTitle(){

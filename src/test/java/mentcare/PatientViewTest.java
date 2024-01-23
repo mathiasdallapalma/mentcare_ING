@@ -23,7 +23,7 @@ public class PatientViewTest extends SystemTest {
         HomePO homePO = new HomePO(driver);
         homePO.loadPage();
 
-        PatientViewPO patientViewPO =new PatientViewPO( homePO.clickName("Jhon Doe"));
+        PatientViewPO patientViewPO =new PatientViewPO( homePO.clickCF("BBB"));
 
         assertEquals("TitlePage", "PatientView", patientViewPO.getTitle());
         assertEquals("Patient expected", "John Doe", patientViewPO.getName());
