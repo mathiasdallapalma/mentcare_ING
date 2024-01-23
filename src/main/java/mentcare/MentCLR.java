@@ -34,6 +34,7 @@ public class MentCLR implements CommandLineRunner {
         Patient p1 = new Patient("John", "Doe", 70, 170,  "2000-04-20",
                 "maschio", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "lattice","BBB");
+        patientRepository.save(p1);
 
         Evaluation e1 = new Evaluation("01/01/2024", 30, "note", "urgenza", p1.getId());
         Evaluation e2 = new Evaluation("02/01/2024", 10, "note", "prenotata", p1.getId());
@@ -43,7 +44,6 @@ public class MentCLR implements CommandLineRunner {
         Prescription pr2 = new Prescription("Tachipirina", 20, "note", p1.getId());
         Prescription pr3 = new Prescription("Luxopedrina", 30, "note", p1.getId());
 
-        patientRepository.save(p1);
         evaluationRepository.save(e1);
         evaluationRepository.save(e2);
         evaluationRepository.save(e3);
@@ -54,6 +54,7 @@ public class MentCLR implements CommandLineRunner {
         p1 = new Patient("Jane", "Doe", 60, 160, "2000-04-20",
                 "femmina", "1234567890", "30elode@aley.org", "Via vittoria 2",
                 "api","CCC");
+        patientRepository.save(p1);
         e1 = new Evaluation("05/01/2024", 20, "note", "urgenza", p1.getId());
         e2 = new Evaluation("12/01/2024", 20, "note", "urgenza", p1.getId());
         e3 = new Evaluation("13/01/2024", 50, "note", "prenotata", p1.getId());
@@ -62,7 +63,6 @@ public class MentCLR implements CommandLineRunner {
         pr2 = new Prescription("Epifrilina", 20, "note", p1.getId());
         pr3 = new Prescription("Luxopedrina", 40, "note", p1.getId());
 
-        patientRepository.save(p1);
         evaluationRepository.save(e1);
         evaluationRepository.save(e2);
         evaluationRepository.save(e3);

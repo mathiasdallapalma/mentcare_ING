@@ -42,16 +42,18 @@ public class Prescription {
         return quantity;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-
-    public Long getpatientID() {
-        return patientID;
-    }
-
     public String selfCheck(List<String> allergies){
-        return allergies.contains(this.drugs)? "Il paziente è allergico al medicinale ["+this.drugs+"] !" : "";
+        String errMsg = "";
+        if(this.drugs.isEmpty() || this.quantity == null){
+            return "Alcuni valori non sono stati inseriti!";
+        }
+        if(allergies.contains(this.drugs)){
+            errMsg = errMsg.concat("Il paziente è allergico al medicinale ["+this.drugs+"] !<br>");
+        }
+        if(this.getQuantity() < 0 || this.getQuantity() > 100){
+            errMsg = errMsg.concat("La quantità inserita dovrebbe essere maggiore di 0 e minore di 100 mg !<br>");
+        }
+        return errMsg;
     }
 
 }

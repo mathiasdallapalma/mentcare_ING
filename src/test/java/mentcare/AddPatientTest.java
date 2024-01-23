@@ -136,7 +136,7 @@ public class AddPatientTest extends SystemTest{
         home.loadPage();
         AddPatientPO addPatPage = new AddPatientPO(home.clickAddPatient());
         home = new HomePO(addPatPage.clickCancel());
-        Assert.assertFalse(home.isError());
+        Assert.assertEquals("home",home.getTitle());
     }
 
     @Test
@@ -145,8 +145,7 @@ public class AddPatientTest extends SystemTest{
         home.loadPage();
         AddPatientPO addPatPage = new AddPatientPO(home.clickAddPatient());
         ErrorPO errPage = new ErrorPO(addPatPage.clickSubmit());
-        Assert.assertTrue("Dovresti avere un errore perché non sono stati inseriti i valori!",
-                errPage.getErrorMessage().toLowerCase().contains("valori mancanti"));
+        Assert.assertEquals(errPage.getTitle().toLowerCase(),"aggiunta paziente fallita");
     }
 
 }

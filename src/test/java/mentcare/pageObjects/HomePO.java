@@ -61,10 +61,6 @@ public class HomePO extends PageObject{
         return driver;
     }
 
-    public boolean isError() {
-        return !driver.getCurrentUrl().equals("http://localhost:8080/home");
-    }
-
     public WebDriver clickReport() {
         reportbutton.click();
         return driver;

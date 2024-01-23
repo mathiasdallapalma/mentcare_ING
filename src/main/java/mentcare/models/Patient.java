@@ -46,6 +46,9 @@ public class Patient {
     }
 
     private Integer calculateAge(String bdate) {
+        if(bdate.isEmpty()){
+            return null;
+        }
         System.out.println(bdate);
         LocalDate now = LocalDate.now();
         LocalDate birthdate = LocalDate.parse(bdate);
@@ -115,14 +118,17 @@ public class Patient {
      */
     public String selfCheck(){
         String errorToRet = "";
+        if(this.getWeight() == null || this.getHeight() == null || this.getAge() == null || this.getCf() == null){
+            return "Alcuni valori non sono stati inseriti!";
+        }
         if(weight > 300 || weight < 0){
-            errorToRet = errorToRet.concat("Il peso inserito dovrebbe essere maggiore di 0 e minore di 300");
+            errorToRet = errorToRet.concat("Il peso inserito dovrebbe essere maggiore di 0 e minore di 300<br>");
         }
         if(this.getHeight() > 250 || this.getHeight() < 0){
-            errorToRet = errorToRet.concat("L'altezza inserita dovrebbe essere maggiore di 0 e minore di 250");
+            errorToRet = errorToRet.concat("L'altezza inserita dovrebbe essere maggiore di 0 e minore di 250<br>");
         }
         if(this.getAge() > 150 || this.getAge() < 0){
-            errorToRet = errorToRet.concat("La data di nascita dovrebbe essere maggiore di 150 anni fa e minore dell'anno corrente");
+            errorToRet = errorToRet.concat("La data di nascita dovrebbe essere maggiore di 150 anni fa e minore dell'anno corrente<br>");
         }
         return errorToRet;
     }
