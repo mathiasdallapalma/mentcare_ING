@@ -42,6 +42,10 @@ public class Prescription {
         return quantity;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
     public String selfCheck(List<String> allergies){
         String errMsg = "";
         if(this.drugs.isEmpty() || this.quantity == null){

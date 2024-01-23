@@ -54,10 +54,6 @@ public class AppController {
             @PathVariable(name = "id", required = true) Long id,
             Model model) {
 
-        /* roba che mi serve per testare verranno sostituiti con funzioni tipo repository.find(...) */ //
-
-        /* fine delle robe che mi servono da testare*/
-
         Optional<Patient> result = patientRepository.findById(id);
 
         if (result.isPresent()) {
