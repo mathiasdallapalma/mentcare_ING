@@ -43,16 +43,16 @@ public class Evaluation {
             LocalDate date = LocalDate.parse(this.date);
             if(date.isAfter(LocalDate.now()))
             {
-                error= error.concat("La data non può essere nel passato<br>");
+                error= error.concat("La data non può essere nel futuro<br>");
             }
         }
 
-        if(this.value<0 || this.value>50)
+        if(value==null||value<0 || value>50)
         {
-            error= error.concat("\nIl valore deve essere compreso tra 0 e 50\n");
+            error= error.concat("\nIl valore deve essere compreso tra 0 e 50<br>");
         }
         if(this.motivation.isEmpty()){
-            error= error.concat("\nLa motivazione non può essere vuota\n");
+            error= error.concat("\nLa motivazione non può essere vuota<br>");
         }
         return error;
     }

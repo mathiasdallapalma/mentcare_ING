@@ -72,7 +72,8 @@ public class AppController {
             return "patientView";
         } else
             model.addAttribute("error_title", "Paziente non trovato");
-        model.addAttribute("error_message", "Nessun paziente trovato con questo ID");
+        model.addAttribute("error_message",
+                "Il paziente con id [" + id.toString() + "] non è stato trovato");
         model.addAttribute("redirect_link", "/home");
         return "error";
     }
@@ -93,7 +94,7 @@ public class AppController {
             @RequestParam(name = "password", required = true) String password,
             Model model) {
         VerificaLoginMOCK verificaLogin = new VerificaLoginMOCK();
-        if (verificaLogin.checkLogin(username, password)) //TODO sostituire con mock
+        if (verificaLogin.checkLogin(username, password))
             return "redirect:/home";
         else
             model.addAttribute("error_title", "Login fallito");
@@ -113,7 +114,7 @@ public class AppController {
         } else {
             model.addAttribute("error_title", "Paziente non trovato");
             model.addAttribute("error_message",
-                    "Il paziente con id [" + idPatient.toString() + "] Non è stato trovato :(\n");
+                    "Il paziente con id [" + idPatient.toString() + "] non è stato trovato");
             model.addAttribute("redirect_link", "/patient/" + idPatient.toString() + "/addPrescription");
             return "error";
         }
@@ -192,6 +193,25 @@ public class AppController {
             return "error";
         }
     }
+
+    @RequestMapping("/report")
+    public String generalReport(
+            Model model) {
+        Iterable<Patient> result = patientRepository.findAll();
+
+        if (result.iterator().hasNext()) {
+
+            String report = MyUtils.generateGeneralReport(result);
+            model.addAttribute("report", report);
+            return "report";
+        } else {
+            model.addAttribute("error_title", "Report non riuscito");
+            model.addAttribute("error_message", "Nessun paziente");
+            model.addAttribute("redirect_link", "/home");
+            return "error";
+        }
+    }
+
 
     @RequestMapping("/patient/{id}/addEvaluation")
     public String addEvaluation(

@@ -14,6 +14,7 @@
 
   </head>
   <body>
+  	<h2 id="title">PatientView</h2>
     <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-4">
@@ -53,7 +54,7 @@
 		</div>
 	<div class="row">
 		<div class="col-md-6">
-			<a href="addEvaluation" id="add_evaluation_btn">
+			<a th:href="${patient.id}+'/addEvaluation'" id="add_evaluation_btn">
 			<button type="button" class="btn btn-success">
 				Aggiungi Valutazione
 			</button>
@@ -91,7 +92,7 @@
 				Aggiungi Prescrizione
 			</button>
 			</a>
-			<table class="table" id="prescription_table">
+			<table class="table" id="prescriptions_table">
 				<thead>
 					<tr>
 						<th>

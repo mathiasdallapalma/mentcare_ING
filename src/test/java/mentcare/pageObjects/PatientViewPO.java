@@ -1,10 +1,14 @@
 package mentcare.pageObjects;
 
+import antlr.ASTNULLType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PatientViewPO extends PageObject{
+
+    @FindBy(id = "title")
+    private WebElement title;
 
     @FindBy(id = "name")
     private WebElement nameText;
@@ -18,10 +22,10 @@ public class PatientViewPO extends PageObject{
     @FindBy(id = "report_btn")
     private WebElement reportButton;
 
-    @FindBy(xpath = "//table[@id='evaluations_table']/tbody/tr[first()]")
+    @FindBy(xpath = "//table[@id='evaluations_table']/tbody/tr[last()]")
     private WebElement lastEvaluationRow;
 
-    @FindBy(xpath = "//table[@id='prescription_table']/tbody/tr[first()]")
+    @FindBy(xpath = "//table[@id='prescriptions_table']/tbody/tr[last()]")
     private WebElement lastPrescriptionRow;
 
     public PatientViewPO(WebDriver d) {
@@ -51,16 +55,17 @@ public class PatientViewPO extends PageObject{
         return nameText.getText();
     }
 
-    public void loadWithID(int i)  {
+    public WebDriver loadWithID(int i)  {
         driver.get("http://localhost:8080/patient/"+i);
-    }
-
-    public boolean isError(int i) {
-        return !driver.getCurrentUrl().equals("http://localhost:8080/patient/" + i);
+        return driver;
     }
 
     public ReportPO clickReport() {
         this.reportButton.click();
         return new ReportPO(driver);
+    }
+
+    public String getTitle() {
+        return title.getText();
     }
 }

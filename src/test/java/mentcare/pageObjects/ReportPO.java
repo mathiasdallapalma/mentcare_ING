@@ -14,7 +14,7 @@ public class ReportPO extends PageObject{
     }
 
     public String getTitle(){
-        return this.title.getText();
+        return title.getText();
     }
 
 

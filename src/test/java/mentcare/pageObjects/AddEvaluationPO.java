@@ -12,6 +12,9 @@ public class AddEvaluationPO extends PageObject{
     private String notes;
     private String motivation;
 
+    @FindBy(id = "title")
+    private WebElement title;
+
     @FindBy(id = "date_input")
     private WebElement dateField;
 

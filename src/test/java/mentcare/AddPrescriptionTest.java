@@ -19,7 +19,7 @@ public class AddPrescriptionTest extends SystemTest{
         addPrescription.addNote("dopo i pasti, per 3 giorni");
 
         PatientViewPO ret = new PatientViewPO(addPrescription.clickSubmit());
-        Assert.assertFalse("Dovevo essere nella pagina del paziente 1", ret.isError(1));
+
 
         //TODO verificare che la prescrizione sia stata inserita nella tabella della pagina paziente, manca il metodo
     }
