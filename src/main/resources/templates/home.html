@@ -72,7 +72,7 @@
                     <td th:text="${patient.age}"> 45 </td>
                     <td th:text="${patient.sex}"> Maschio</td>
                     <td th:text="${patient.address}"> Via vittoria 2 </td>
-                    <td><a id="${patient.cf}" th:href="'/patient/'+${patient.id}" th:text="${patient.cf}"> cf </a></td>
+                    <td><a th:id="${patient.cf}" th:href="'/patient/'+${patient.id}" th:text="${patient.cf}"> cf </a></td>
                 </tr>
                 </tbody>
             </table>

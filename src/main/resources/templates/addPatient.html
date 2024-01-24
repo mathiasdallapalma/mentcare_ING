@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -24,8 +24,13 @@
     Allergie : <input id="allergies_input" type="text" name="allergies"><br><br>
     Codice Fiscale : <input id="cf_input" type="text" name="cf"><br><br>
     <input id="submitbutton_input" type="submit"/>
-    <a id="cancelbutton_input" href="redirect:/home"><button>Cancel</button></a>
 </form>
+
+<a th:href="'/home'" id="cancelbutton_input">
+    <button type="button" class="btn btn-success">
+        Cancel
+    </button>
+</a>
 
 
 </body>

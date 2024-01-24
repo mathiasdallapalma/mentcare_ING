@@ -145,7 +145,7 @@ public class AddPatientTest extends SystemTest{
         home.loadPage();
         AddPatientPO addPatPage = new AddPatientPO(home.clickAddPatient());
         home = new HomePO(addPatPage.clickCancel());
-        assertEquals("home",home.getTitle());
+        assertEquals("Home",home.getTitle());
     }
 
     @Test

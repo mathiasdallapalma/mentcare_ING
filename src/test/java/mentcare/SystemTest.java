@@ -2,6 +2,7 @@ package mentcare;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,6 +16,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class SystemTest {
@@ -22,9 +25,8 @@ public class SystemTest {
     protected WebDriver driver;
     @Before
     public void setUp() {
-
         FirefoxOptions options = new FirefoxOptions();
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
 
         /*
         if(SystemUtils.IS_OS_WINDOWS){
@@ -44,6 +46,12 @@ public class SystemTest {
                 Paths.get("src/test/resources/gekodriver/geckodriver").toString());
         if (driver == null)
             driver = new FirefoxDriver(options);
+    }
+
+    @Test
+    public void loadApp() {
+        driver.get("http://localhost:8080");
+        assertEquals("TitlePage", "Home", driver.getTitle());
     }
 
     @After

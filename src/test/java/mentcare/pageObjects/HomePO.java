@@ -47,8 +47,8 @@ public class HomePO extends PageObject{
      * il link con il nome e viene cliccato, reindirizzando la navigazione.
      */
     public WebDriver clickCF(String cf){
-        //driver.findElement(By.id(cf)).click(); servirebbe il try-catch
-        driver.findElements(By.xpath("/tbody[1]/tr/td[contains(text(),'"+cf+"')]")).get(0).click();
+        driver.findElement(By.id(cf)).click();// servirebbe il try-catch
+
         return driver;
     }
 
