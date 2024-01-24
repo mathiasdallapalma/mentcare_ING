@@ -109,8 +109,4 @@ public class MyUtils {
         return res;
     }
 
-
-    public static boolean validateLogin(String username, String password) {
-        return username.equals("admin") && password.equals("admin");
-    }
 }
