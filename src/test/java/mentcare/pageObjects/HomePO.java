@@ -39,9 +39,7 @@ public class HomePO extends PageObject{
     }
 
     public String getTitle(){
-        System.out.println(title);
         return title.getText();
-
     }
 
     /**

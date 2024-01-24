@@ -4,8 +4,10 @@ import mentcare.pageObjects.AddPatientPO;
 import mentcare.pageObjects.ErrorPO;
 import mentcare.pageObjects.HomePO;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class AddPatientTest extends SystemTest{
@@ -14,9 +16,9 @@ public class AddPatientTest extends SystemTest{
     public void addPatientTestOK(){
         String firstname = "Marianna";
         String lastname = "Marroni";
-        Integer weight = 70;
-        Integer height = 170;
-        String birthdate = "default";
+        String weight = "70";
+        String height = "170";
+        String birthdate = "2000-01-01";
         String sex = "Femmina";
         String phonenumber = "123 4567890";
         String email = "default@mentcare.org";
@@ -30,8 +32,8 @@ public class AddPatientTest extends SystemTest{
 
         addPatientPage.addFirstname(firstname);
         addPatientPage.addLastname(lastname);
-        addPatientPage.addWeight(weight.toString());
-        addPatientPage.addHeight(height.toString());
+        addPatientPage.addWeight(weight);
+        addPatientPage.addHeight(height);
         addPatientPage.addBirthdate(birthdate);
         addPatientPage.addSex(sex);
         addPatientPage.addPhonenumber(phonenumber);
@@ -41,7 +43,10 @@ public class AddPatientTest extends SystemTest{
         addPatientPage.addCf(cf);
 
         HomePO home2 = new HomePO(addPatientPage.clickSubmit());
-        Assert.assertTrue(home2.isCfPresent(cf)); //non sono sicuro sia corretto
+
+
+        assertEquals("home",home2.getTitle().toLowerCase());
+
     }
 
     @Test
@@ -50,7 +55,7 @@ public class AddPatientTest extends SystemTest{
         String lastname = "Di là";
         Integer weight = 700;
         Integer height = 1700;
-        String birthdate = "05-03-1800";
+        String birthdate = "1800-03-05";
         String sex = "Maschio";
         String phonenumber = "123 4567890";
         String email = "elicottero@rosacanina.com";
@@ -76,24 +81,26 @@ public class AddPatientTest extends SystemTest{
 
         ErrorPO errPage = new ErrorPO(addPatientPage.clickSubmit());
         String errMess = errPage.getErrorMessage().toLowerCase();
-        Assert.assertTrue(errMess.contains("peso"));
-        Assert.assertTrue(errMess.contains("altezza"));
-        Assert.assertTrue(errMess.contains("data di nascita"));
+
+        assertEquals("Error expected", "Aggiunta paziente fallita", errPage.getTitle());
+        assertTrue(errMess.contains("peso"));
+        assertTrue(errMess.contains("altezza"));
+        assertTrue(errMess.contains("data di nascita"));
     }
 
     @Test
     public void addPatientTestErrorSameCF(){
-        String firstname = "John";
-        String lastname = "Wick";
-        Integer weight = 80;
-        Integer height = 177;
-        String birthdate = "default";
-        String sex = "Maschio";
+        String firstname = "Marianna";
+        String lastname = "Marroni";
+        String weight = "70";
+        String height = "170";
+        String birthdate = "2000-01-01";
+        String sex = "Femmina";
         String phonenumber = "123 4567890";
-        String email = "default@easykills.org";
-        String address = "??Unknown??";
-        String allergies = "";
-        String cf = "AAA";
+        String email = "default@mentcare.org";
+        String address = "via vittoria 2";
+        String allergies = "tachipirina,pioppi,pesce";
+        String cf = "codice fiscale 3";
 
         HomePO home = new HomePO(driver);
         home.loadPage();
@@ -101,8 +108,8 @@ public class AddPatientTest extends SystemTest{
 
         addPatientPage.addFirstname(firstname);
         addPatientPage.addLastname(lastname);
-        addPatientPage.addWeight(weight.toString());
-        addPatientPage.addHeight(height.toString());
+        addPatientPage.addWeight(weight);
+        addPatientPage.addHeight(height);
         addPatientPage.addBirthdate(birthdate);
         addPatientPage.addSex(sex);
         addPatientPage.addPhonenumber(phonenumber);
@@ -116,8 +123,8 @@ public class AddPatientTest extends SystemTest{
 
         addPatientPage2.addFirstname(firstname);
         addPatientPage2.addLastname(lastname);
-        addPatientPage2.addWeight(weight.toString());
-        addPatientPage2.addHeight(height.toString());
+        addPatientPage2.addWeight(weight);
+        addPatientPage2.addHeight(height);
         addPatientPage2.addBirthdate(birthdate);
         addPatientPage2.addSex(sex);
         addPatientPage2.addPhonenumber(phonenumber);
@@ -127,7 +134,9 @@ public class AddPatientTest extends SystemTest{
         addPatientPage2.addCf(cf);
 
         ErrorPO err = new ErrorPO(addPatientPage2.clickSubmit());
-        Assert.assertEquals("Utente con lo stesso CF e' gia' registrato.", err.getErrorMessage());
+
+        assertEquals("Error expected", "Aggiunta paziente fallita", err.getTitle());
+        assertEquals("Utente con lo stesso CF e' gia' registrato.", err.getErrorMessage());
     }
 
     @Test
@@ -136,7 +145,7 @@ public class AddPatientTest extends SystemTest{
         home.loadPage();
         AddPatientPO addPatPage = new AddPatientPO(home.clickAddPatient());
         home = new HomePO(addPatPage.clickCancel());
-        Assert.assertEquals("home",home.getTitle());
+        assertEquals("home",home.getTitle());
     }
 
     @Test
@@ -145,7 +154,7 @@ public class AddPatientTest extends SystemTest{
         home.loadPage();
         AddPatientPO addPatPage = new AddPatientPO(home.clickAddPatient());
         ErrorPO errPage = new ErrorPO(addPatPage.clickSubmit());
-        Assert.assertEquals(errPage.getTitle().toLowerCase(),"aggiunta paziente fallita");
+        assertEquals(errPage.getTitle().toLowerCase(),"aggiunta paziente fallita");
     }
 
 }

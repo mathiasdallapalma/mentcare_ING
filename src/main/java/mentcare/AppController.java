@@ -48,6 +48,14 @@ public class AppController {
         model.addAttribute("patients", lPatients);
         return "home";
     }
+    @RequestMapping("/")
+    public String home2(Model model) {
+        Iterable<Visit> lVisite = visitRepository.findAll();
+        model.addAttribute("visits", lVisite);
+        Iterable<Patient> lPatients = patientRepository.findAll();
+        model.addAttribute("patients", lPatients);
+        return "home";
+    }
 
     @RequestMapping("/patient/{id}")
     public String patientView(
@@ -131,14 +139,14 @@ public class AppController {
                 return "redirect:/patient/" + idPatient.toString(); //TODO: funziona così??
             } else {
                 model.addAttribute("error_title", "Inserimento prescrizione non riuscito");
-                model.addAttribute("error", errorMsg);
+                model.addAttribute("error_message", errorMsg);
                 model.addAttribute("redirect_link", "/patient/" + idPatient + "/addPrescription");
                 return "error";
             }
         } else {
             model.addAttribute("error_title",
                     "Inserimento prescrizione non riuscito");
-            model.addAttribute("error", "Paziente con id [" + idPatient.toString() + "] Non trovato");
+            model.addAttribute("error_message", "Paziente con id [" + idPatient.toString() + "] Non trovato");
             model.addAttribute("redirect_link", "patient/" + idPatient);
             return "error";
         }
@@ -159,12 +167,20 @@ public class AppController {
                              @RequestParam(name = "cf") String cf) {
         Patient pat = new Patient(firstname, lastname, weight, height, birthdate, sex,
                 phonenumber, email, address, allergies, cf);
-        if (pat.selfCheck().isEmpty()) { //.equals("") me lo corregge così
+
+        boolean samecf = patientRepository.findByCf(cf).isPresent();
+        String errors= pat.selfCheck();
+        System.out.println(samecf);
+        if (samecf) {
+            errors="Utente con lo stesso CF e' gia' registrato.";
+        }
+
+        if (errors.isEmpty()) { //.equals("") me lo corregge così
             patientRepository.save(pat);
             return "redirect:/home";
         } else {
             model.addAttribute("error_title", "Aggiunta paziente fallita");
-            model.addAttribute("error_message", pat.selfCheck());
+            model.addAttribute("error_message", errors);
             model.addAttribute("redirect_link", "/home");
             return "error";
         }

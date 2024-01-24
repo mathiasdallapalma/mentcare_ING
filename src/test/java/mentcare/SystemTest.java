@@ -24,8 +24,7 @@ public class SystemTest {
     public void setUp() {
 
         FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--headless");
-
+        //options.addArguments("--headless");
 
         /*
         if(SystemUtils.IS_OS_WINDOWS){
@@ -46,10 +45,6 @@ public class SystemTest {
         if (driver == null)
             driver = new FirefoxDriver(options);
     }
-
-
-
-
 
     @After
     public void tearDown() {

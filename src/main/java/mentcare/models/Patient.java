@@ -49,10 +49,9 @@ public class Patient {
         if(bdate.isEmpty()){
             return null;
         }
-        System.out.println(bdate);
         LocalDate now = LocalDate.now();
         LocalDate birthdate = LocalDate.parse(bdate);
-        System.out.println(birthdate);
+
         return LocalDate.now().getYear() - LocalDate.parse(bdate).getYear();
     }
 

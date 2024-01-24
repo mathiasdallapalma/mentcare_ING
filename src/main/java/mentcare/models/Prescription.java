@@ -52,7 +52,7 @@ public class Prescription {
             return "Alcuni valori non sono stati inseriti!";
         }
         if(allergies.contains(this.drugs)){
-            errMsg = errMsg.concat("Il paziente è allergico al medicinale ["+this.drugs+"] !<br>");
+            errMsg = errMsg.concat("Il paziente è allergico al medicinale \""+this.drugs+"\" !<br>");
         }
         if(this.getQuantity() < 0 || this.getQuantity() > 100){
             errMsg = errMsg.concat("La quantità inserita dovrebbe essere maggiore di 0 e minore di 100 mg !<br>");

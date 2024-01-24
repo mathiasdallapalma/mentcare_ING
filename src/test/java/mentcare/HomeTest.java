@@ -9,6 +9,7 @@ public class HomeTest extends SystemTest{
     @Test
     public void checkReport(){
         HomePO home = new HomePO(driver);
+        home.loadPage();
         ReportPO rep = new ReportPO(home.clickReport());
         Assert.assertEquals("report", rep.getTitle().toLowerCase());
     }
