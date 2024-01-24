@@ -1,8 +1,18 @@
 # Mental Care
 
-## Scenarios:
+## Authors
+- Alessandro Pallotta **VR501256**
+- Mathias Dalla Palma **VR504159**
+
+## Project
+
+MentCare è un'app pensata per rendere più semplici e efficienti le operazioni di amministrazione all'interno di una clinica medica come ad esempio la gestione delle informazioni dei pazienti, delle loro valutazioni e prescrizioni e la consultazione di alcune informazioni statistiche sui dati del sistema.
+
+## Requisiti
+
+### Scenarios:
  	 	 	
-### 1. LOGIN
+#### 1. LOGIN
 |   |   |
 |---|---|
 | **Assumptions** | Un utente si trova sulla pagina di login e vuole autenticarsi sulla piattaforma MentCare attraverso le credenziali fornite al momento dell’iscrizione. L’utente dovrebbe possedere tali credenziali e dovrebbero coincidere con quelle presenti nei registri di sistema della piattaforma in modo da garantire l’accesso appropriato.|
@@ -32,13 +42,13 @@
 |**Errors**| Il sistema potrebbe trovarsi in uno stato in cui non è possibile generare un report per esempio se nessun paziente è stato ancora registrato. In questo caso la pagina mostra un messaggio di errore.|
 |**Sysytem status**| La pagina mostra un messaggio di operazione riuscita, nel backend viene aggiunta una voce ai log e viene creato il file richiesto in una cartella apposita. Infine il file contenente il report è stato scaricato sul dispositivo dell’utente che ha richiesto la funzione.|
 
-### 4. AGGIUNTA VISITA PAZIENTE
+### 4. AGGIUNTA VALUTAZIONE PAZIENTE
 **NOTA ho modificato da valutazione a visita
 | | |
 |-|-|
-|**Assumptions**|Un utente autenticato vuole aggiungere una visita ad uno specifico paziente. L’utente si trova sulla pagina dei dettagli del paziente.|
-|**Flow**|L'utente clicca sul pulsante aggiungi visita e la navigazione viene reindirizzata alla pagina di aggiunta visita. L’utente inserisce nel form di valutazione i dati relativi alla visita (data, motivo, esito, note) nei rispettivi campi e clicca sul bottone di conferma. Il sistema verifica che i dati siano consistenti e se lo sono li salva associandoli allo specifico paziente.|
-|**GUI objects**|• bottone “aggiungi” <br> pagina dedicata alla registrazione di una nuova visita:<br>• form dati <br>• bottoni "accetta" e "annulla"|
+|**Assumptions**|Un utente autenticato vuole aggiungere una valutazione ad uno specifico paziente. L’utente si trova sulla pagina dei dettagli del paziente.|
+|**Flow**|L'utente clicca sul pulsante aggiungi valutazione e la navigazione viene reindirizzata alla pagina di aggiunta valutazione. L’utente inserisce nel form di valutazione i dati relativi alla visvalutazioneita (data, motivo, esito, note) nei rispettivi campi e clicca sul bottone di conferma. Il sistema verifica che i dati siano consistenti e se lo sono li salva associandoli allo specifico paziente.|
+|**GUI objects**|• bottone “aggiungi” <br> pagina dedicata alla registrazione di una nuova valutazione:<br>• form dati <br>• bottoni "accetta" e "annulla"|
 |**Errors**|I dati inseriti potrebbero contenere degli errori per esempio la data inserita è futura rispetto a quella odierna oppure il campo motivo non è stato selezionato correttamente.|
 |**Sysytem status**|I dati inseriti vengono salvati nel sistema e sono visualizzabili come prima voce nella sezione Visite.|
 
@@ -52,13 +62,13 @@
 |**Errors**| L'utente dottore potrebbe chiudere la finestra prima che il file venga generato, annullando l'operazione anche se il file sarà comunque generato in backend.|
 |**Sysytem status**| Con esito positivo il sistema registra l'evento di modifica, genera e invia le info dell'evento agli utenti legati al paziente infine reindirizza l'utente  nella pagina del paziente da cui era partito, qui può verificare l'avvenuta modifica. Nel caso in cui l'utente annulli l’operazione il sistema lo reindirizza alla pagina del paziente.|
 
-### 6. MODIFICA PRESCRIZIONE PAZIENTE
+### 6. AGGIUNTA PRESCRIZIONE PAZIENTE
 | | |
 |-|-|
-|**Assumptions**| Un utente autenticato vuole modificare la prescrizione di un certo paziente o aggiungere nel caso in cui non ne abbia già una.|
+|**Assumptions**| Un utente autenticato vuole aggiungere una prescrizione a un certo paziente|
 |**Flow**| L'utente tramite la pagina del paziente utilizza il bottone “modifica prescrizione” nella sezione della prescrizione per alterare i medicinali e/o trattamenti che un paziente deve seguire. Il sistema  reindirizza la navigazione  alla pagina in cui  è presente la prescrizione precedente e un form. L'utente tramite il form può alterare il testo e tramite bottoni i "accetta" e "annulla" può confermare o annullare l'operazione.|
 |**GUI objects**|• bottone “modifica” nella sezione prescrizione medica<br>pagina dedicata:<br>• identificativo paziente<br>• testo precedente<br>• form per il nuovo testo<br>• bottoni accetta o annulla|
-|**Errors**| I dati inseriti potrebbero contenere degli errori per esempio la data inserita è futura rispetto a quella odierna oppure i medicinali inseriti non sono compatibili con il paziente oppure la quantità di medicinali non è corretta. In ogni caso viene mostrata una finestra con un messaggio dell’errore specifico e l’utente dovrà correggere il testo inserito.**NOTA: analisi delle stringhe x allergie e simili.**|
+|**Errors**| I dati inseriti potrebbero contenere degli errori per esempio la data inserita è futura rispetto a quella odierna oppure i medicinali inseriti non sono compatibili con il paziente oppure la quantità di medicinali non è corretta. In ogni caso viene mostrata una finestra con un messaggio dell’errore specifico e l’utente dovrà correggere il testo inserito.|
 |**Other**| Altri utenti legati al paziente a cui è stata effettuata la modifica ricevono una email di notifica, essa contiene l'utente che ha effettuato il cambiamento, un'identificazione del paziente, il testo e data+ora.|
 |**Sysytem status**| Il sistema registra l'evento di modifica, genera e invia le info dell'evento agli utenti legati al paziente. Infine il sistema reindirizza la navigazione alla pagina del paziente, in cui  può verificare l'avvenuta modifica.|
 
@@ -67,7 +77,43 @@
 |-|-|
 |**Assumptions**| Un utente autenticato vuole aggiungere un nuovo paziente al sistema. L'utente si trova nella pagina home.|
 |**GUI objects**|• bottone “aggiungi paziente”<br>  pagina dedicata alla registrazione di un nuovo utente paziente nel sistema:<br>•form dati anagrafici<br>• bottoni "accetta" e "annulla"|
-|**Flow**| L'utente utilizza l'apposito bottone nella home "aggiungi paziente" e viene reindirizzato dal sistema in una pagina dedicata alla creazione di un nuovo profilo paziente. L'utente inserisce i vari dati anagrafici del nuovo paziente nell'apposito form, inoltre deve inserire le allergie o farmaci che non può assumere. Infine l’utente deve confermare o annullare l'operazione tramite appositi bottoni.**NOTA: Sto pensando ad un text box in cui inserire i vari nomi, poi facciamo un “split” e ogni parola la inseriamo in un “database delle allergie”, ovviamente con il mock. Casomai ne parliamo per semplificare questa roba.
-Risposta mia: perfetto con lo split secondo me**|
+|**Flow**| L'utente utilizza l'apposito bottone nella home "aggiungi paziente" e viene reindirizzato dal sistema in una pagina dedicata alla creazione di un nuovo profilo paziente. L'utente inserisce i vari dati anagrafici del nuovo paziente nell'apposito form, inoltre deve inserire le allergie o farmaci che non può assumere. Infine l’utente deve confermare o annullare l'operazione tramite appositi bottoni.|
 |**Errors**| L'utente potrebbe provare a creare più profili dello stesso paziente, tramite il codice fiscale il sistema assicura che non accada.|
 |**Sysytem status**| Nel caso di inserimento andato a buon fine il nuovo utente viene aggiunto al sistema e l’utente viene reindirizzato alla pagina home. Con esito negativo la pagina mostra un errore specifico.|
+
+## Sviluppo
+Per la scelta degli scenari abbiamo immaginato situazioni legate a diverse situazioni di utilizzo, in modo da avere un’applicazione utilizzabile una volta completata. Nel dettaglio abbiamo costruito gli scenari rispetto al punto di vista di un utente con il ruolo di dottore, ipotizzando come avrebbe potuto utilizzare la nostra applicazione in un contesto reale; per semplicità nei vari documenti è chiamato solo utente. 
+#### Componenti implementati:
+Seguendo gli scenari abbiamo implementato le pagine necessarie per effettuare le varie funzionalità:
+- `/login` - per autenticare l’utente; invece di un vero sistema di autenticazione abbiamo simulato il login con un MOCK, **le credenziali per l’accesso alla pagina home sono admin, admin**.
+- `/home` - pagina per la visualizzazione dei pazienti e delle visite, questa è la pagina principali da cui l’utente può usufruire delle varie funzionalità espresse nei vari scenari. 
+- `/patient/{id}` - corrisponde alla pagina di visualizzazione del singolo paziente, qui sono presenti i dati anagrafici e di contatto, le tabelle contenenti le sue valutazioni e le sue prescrizioni, inoltre da questa pagina è possibile spostarsi nelle pagine di report, inserimento prescrizione e inserimento valutazione.
+- `/patient/{id}/addPrescription` - è la pagina utilizzata per aggiungere una prescrizione al paziente
+- `/patient/{id}/addEvaluation` - è la pagina utilizzata per aggiungere una valutazione al paziente
+- `/patient/{id}/report` - questa pagina simula la creazione e download di un file di report che comprende un riassunto dei dati del paziente. La pagina mostra un report con varie statistiche basate sui dati effettivamente presenti nel sistema.
+- `/report` - questa pagina simula la creazione e download del file di report generale, la pagina genera effettivamente un report con varie statistiche basate sui dati effettivamente presenti nel sistema.
+- `/error` - la pagina di errore viene generata dalle altre pagine e in base all’errore gli viene fornito un titolo, un messaggio e un link per tornare indietro.
+
+
+#### Processo di sviluppo  
+Per il progetto ci siamo ispirati a due tecniche di implementazione viste a lezione: una volta definiti gli scenari abbiamo deciso di seguire una progettazione **test-driven** (scrivendo prima i casi di test e successivamente implementando i componenti per soddisfarli) e un **processo di sviluppo agile** cercando man mano di implementare funzionalità complete e che potessero essere utilizzate da un utente finale. Non abbiamo fissato delle vere e proprie tempistiche per gli sprint data la semplicità del progetto e abbiamo effettuato l’implementazione in base alla priorità di utilizzo dei vari componenti. 
+
+Dato che l’approccio ai test è tramite PageObjects: come prima cosa abbiamo valutato i possibili oggetti da inserire nelle pagine per avere un’immagine più chiara di quello che sarebbe servito (questi sono presenti nella sezione degli scenari). Fatto ciò, abbiamo iniziato ad implementare i vari PageObject, anche se non erano definitivi sono stati utili per concretizzare al meglio alcuni dettagli ancor prima di iniziare la vera e propria scrittura dei test. Abbiamo infine codificato il possibile comportamento dell’utente attraverso le azioni che potrebbe svolgere all’interno dell’applicazione e scritto le asserzioni che rispecchiassero i vari risultati attesi.
+
+Una volta completata la scrittura dei test siamo passati all’implementazione dei vari componenti: abbiamo iniziato dall’implementazione delle pagine più importanti, in modo da essere sicuri di avere i collegamnti necessari per le pagine secondarie.
+
+Completati i componenti principali siamo passati ad implementare componenti con una priorità più bassa come i report e le pagine di errore. Inizialmente la pagina di errore era stata immaginata più semplice di quella che è stata sviluppata, di conseguenza abbiamo dovuto correggere i test per aggiungere i dettagli degli errori e i metodi per la generazione dei messaggi di errore che sono presenti nelle classi model (selfCheck()).\
+Infine siamo passati a una fase di debugging correggendo errori delle pagine html, errori di visualizzazione e alcuni test che non erano allineati all’implementazione, infine abbiamo testato il sistema nella sua interezza.
+
+#### Approccio di branching
+
+In questa fase abbiamo utilizzato i branch git in modo da dividere meglio il carico di lavoro per vari elementi in sviluppo, la politica che abbiamo scelto è stata: costruirne un branch per ogni funzionalità dell’applicazione.\
+Inoltre, prima di cambiare branch abbiamo eseguito i test per assicurarci che l’implementazione fosse completa e corretta. L’utilizzo dei branch ci ha permesso di lavorare su funzionalità diverse simultaneamente senza interferire l'uno con l'altro.
+
+## Testing e coverage
+
+Per la scrittura dei test ci siamo basati sui **flow** specificati negli scenari e sugli **errors** degli stessi. L'obiettivo principale era assicurare che l'applicazione si comportasse correttamente e in modo affidabile a diverse condizioni operative sia con esito positivo che negativo. In questo modo abbiamo raggiunto una buona **test-coverage** del progetto:
+
+<img width="400px" src="coverage.png">
+
+Oltre a questi test principali, avevamo previsto dei test specifici sui componenti più piccoli (unit test), ma queste funzionalità sono già coperte dai test di accettazione delle pagine. Di conseguenza ci è sembrato superfluo creare ulteriori test specifici, anche perché lo stato dell’applicazione rispettava appieno i requisiti dettati dagli scenari.
