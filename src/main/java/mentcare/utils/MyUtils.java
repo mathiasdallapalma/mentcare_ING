@@ -44,8 +44,8 @@ public class MyUtils {
 
         for(Patient p : patients){
             avgAge+= p.getAge();
-            maleCount+= p.getSex().equals("maschio") ? 1 : 0;
-            femaleCount+= p.getSex().equals("femmina") ? 1 : 0;
+            maleCount+= p.getSex().toLowerCase().equals("maschio") ? 1 : 0;
+            femaleCount+= p.getSex().toLowerCase().equals("femmina") ? 1 : 0;
             avgHeight+= p.getHeight();
             avgWeight+= p.getWeight();
             count++;
