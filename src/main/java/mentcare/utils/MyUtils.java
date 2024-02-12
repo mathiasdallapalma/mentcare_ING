@@ -15,12 +15,32 @@ public class MyUtils {
 
 
     public static String generateGeneralReport(Iterable<Patient> patients){
-        Float avgAge = 0f;
-        Integer maleCount = 0;
-        Integer femaleCount = 0;
-        Float avgHeight = 0f;
-        Float avgWeight = 0f;
-        Integer count= 0;
+
+        Map<String, Object> data = calc1(patients);
+
+        String res= "{<br>" +
+                ".   \"patients\":{<br>" +
+                ". .     \"count\":" + data.get("count") + ",<br>" +
+                ". .     \"maleCount\":" + data.get("maleCount") + ",<br>" +
+                ". .     \"femaleCount\":" + data.get("femaleCount") + ",<br>" +
+                ". .     \"avgAge\":" + data.get("avgAge") + ",<br>" +
+                ". .     \"avgHeight\":" + data.get("avgHeight") + ",<br>" +
+                ". .     \"avgWeight\":" + data.get("avgWeight") + ",<br>" +
+                ".   }<br>"+
+                "}<br>";
+
+        return res;
+    }
+
+    public static Map<String,Object> calc1(Iterable<Patient> patients){
+
+        Map<String, Object> res = new HashMap<>();
+        float avgAge = 0f;
+        int maleCount = 0;
+        int femaleCount = 0;
+        float avgHeight = 0f;
+        float avgWeight = 0f;
+        int count= 0;
 
         for(Patient p : patients){
             avgAge+= p.getAge();
@@ -34,16 +54,13 @@ public class MyUtils {
         avgHeight = avgHeight/count;
         avgWeight = avgWeight/count;
 
-        String res= "{<br>" +
-                ".   \"patients\":{<br>" +
-                ". .     \"count\":" + count + ",<br>" +
-                ". .     \"maleCount\":\"" + maleCount + "\",<br>" +
-                ". .     \"femaleCount\":" + femaleCount + ",<br>" +
-                ". .     \"avgAge\":" + avgAge + ",<br>" +
-                ". .     \"avgHeight\":" + avgHeight + ",<br>" +
-                ". .     \"avgWeight\":" + avgWeight + ",<br>" +
-                ".   }<br>"+
-                "}<br>";
+
+        res.put("avgAge", avgAge);
+        res.put("maleCount", maleCount);
+        res.put("femaleCount", femaleCount);
+        res.put("avgHeight", avgHeight);
+        res.put("avgWeight", avgWeight);
+        res.put("count", count);
 
         return res;
     }
@@ -51,33 +68,7 @@ public class MyUtils {
 
     public static String generatePatientReport(Patient patient, List<Prescription> prescriptions, List<Evaluation> evaluations) {
 
-        String mostAssumedDrugs="";
-        HashMap<String, Integer> mapDrugs = new HashMap<>();
-
-        if(!prescriptions.isEmpty()) {
-            for (Prescription p : prescriptions) {
-                String[] drugs = p.getDrugs().split(",");
-                for (String d : drugs) {
-                    if (mapDrugs.containsKey(d)) {
-                        mapDrugs.put(d, mapDrugs.get(d) + 1);
-                    } else {
-                        mapDrugs.put(d, 1);
-                    }
-                }
-            }
-
-            mostAssumedDrugs = Collections.max(mapDrugs.entrySet(), Map.Entry.comparingByValue()).getKey();
-        }
-
-        Float averageValue = 0f;
-
-        if(!evaluations.isEmpty()) {
-
-            for (Evaluation e : evaluations) {
-                averageValue += e.getValue();
-            }
-            averageValue = averageValue / evaluations.size();
-        }
+        Map<String, Object> data = calc2(patient, prescriptions, evaluations);
 
         String res= "{<br>" +
                 ".   \"patient\":{<br>" +
@@ -97,14 +88,56 @@ public class MyUtils {
                 "}<br>"+
                 "prescriptions: {<br>"+
                 ". .  \"count\":" + prescriptions.size() + ",<br>"+
-                ". .  \"ListOfDrugsAssumed\":["+ mapDrugs + "],<br>"+
-                ". .  \"DrugMostAssumed\":["+ mostAssumedDrugs + "],<br>"+
+                ". .  \"ListOfDrugsAssumed\":["+ data.get("mapDrugs") + "],<br>"+
+                ". .  \"DrugMostAssumed\":["+ data.get("mostAssumedDrugs") + "],<br>"+
                 "}<br>"+
                 "evaluations: {<br>"+
                 ". .  \"count\":" + evaluations.size() + ",<br>"+
-                ". .  \"averageValue\":"+ averageValue+ ",<br>"+
+                ". .  \"averageValue\":"+ data.get("averageValue") + ",<br>"+
 
                 "}<br>";
+
+        return res;
+    }
+
+    public static Map<String,Object> calc2(Patient patient, List<Prescription> prescriptions, List<Evaluation> evaluations){
+
+        Map<String, Object> res = new HashMap<>();
+
+        String mostAssumedDrugs="";
+        HashMap<String, Integer> mapDrugs = new HashMap<>();
+        float averageValue = 0f;
+
+        if(!prescriptions.isEmpty()) {
+            for (Prescription p : prescriptions) {
+                String[] drugs = p.getDrugs().split(",");
+                for (String d : drugs) {
+                    if (mapDrugs.containsKey(d)) {
+                        mapDrugs.put(d, mapDrugs.get(d) + 1);
+                    } else {
+                        mapDrugs.put(d, 1);
+                    }
+                }
+            }
+
+            mostAssumedDrugs = Collections.max(mapDrugs.entrySet(), Map.Entry.comparingByValue()).getKey();
+        }
+
+
+
+        if(!evaluations.isEmpty()) {
+
+            for (Evaluation e : evaluations) {
+                averageValue += e.getValue();
+            }
+            averageValue = averageValue / evaluations.size();
+        }
+
+
+
+        res.put("mostAssumedDrugs", mostAssumedDrugs);
+        res.put("mapDrugs", mapDrugs);
+        res.put("averageValue", averageValue);
 
         return res;
     }
