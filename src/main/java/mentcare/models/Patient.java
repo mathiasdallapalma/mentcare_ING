@@ -49,10 +49,22 @@ public class Patient {
         if(bdate.isEmpty()){
             return null;
         }
-        LocalDate now = LocalDate.now();
-        LocalDate birthdate = LocalDate.parse(bdate);
+        try {
+            LocalDate now = LocalDate.now();
+            LocalDate birthdate = LocalDate.parse(bdate);
 
-        return LocalDate.now().getYear() - LocalDate.parse(bdate).getYear();
+            return LocalDate.now().getYear() - LocalDate.parse(bdate).getYear();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public void setBirthdateAndAge(String bdate){
+        Integer toret = calculateAge(bdate);
+        if(toret != null){
+            this.birthdate = bdate;
+            this.age = toret;
+        }
     }
 
     private List<String> getAllergiesList(String allergies) {
