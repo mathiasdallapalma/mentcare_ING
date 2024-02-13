@@ -103,7 +103,6 @@ public class MyUtils {
     public static Map<String,Object> calc2(Patient patient, List<Prescription> prescriptions, List<Evaluation> evaluations){
 
         Map<String, Object> res = new HashMap<>();
-
         String mostAssumedDrugs="";
         HashMap<String, Integer> mapDrugs = new HashMap<>();
         float averageValue = 0f;
@@ -119,26 +118,19 @@ public class MyUtils {
                     }
                 }
             }
-
             mostAssumedDrugs = Collections.max(mapDrugs.entrySet(), Map.Entry.comparingByValue()).getKey();
         }
 
-
-
         if(!evaluations.isEmpty()) {
-
             for (Evaluation e : evaluations) {
                 averageValue += e.getValue();
             }
             averageValue = averageValue / evaluations.size();
         }
 
-
-
         res.put("mostAssumedDrugs", mostAssumedDrugs);
         res.put("mapDrugs", mapDrugs);
         res.put("averageValue", averageValue);
-
         return res;
     }
 

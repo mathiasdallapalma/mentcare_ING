@@ -93,10 +93,12 @@ public class UnitTest{
     @Test
     public void utilsGetAllergiesList(){
         String allergies = "tachipirina,pioppi,pesce";
+        List<String> expectedAllergies =new ArrayList<>();
+        expectedAllergies.add("tachipirina");
+        expectedAllergies.add("pioppi");
+        expectedAllergies.add("pesce");
         List<String> allergiyList = MyUtils.createAllergiesList(allergies);
-        for(String s: allergiyList){
-            Assert.assertTrue(allergies.contains(s));
-        }
+        Assert.assertEquals("Allergies: ",expectedAllergies,allergiyList);
     }
 
     @Test
